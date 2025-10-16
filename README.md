@@ -1,70 +1,328 @@
-# Getting Started with Create React App
+# SkillSwap
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📚 Project Description
 
-## Available Scripts
+**SkillSwap** is a peer-to-peer skill exchange platform that connects people who want to learn with those who want to teach. Users can share their expertise and acquire new skills through mutual exchanges, building a collaborative learning community without monetary transactions.
 
-In the project directory, you can run:
+### Key Features
+- **User Profiles & Skill Management** - Create profiles showcasing your skills and learning interests
+- **Smart Skill Matching** - Algorithm-based pairing of compatible learners and teachers
+- **Messaging & Scheduling** - Direct communication and calendar integration for session planning
+- **Rating & Review System** - Build community trust through user feedback
+- **Real-time Notifications** - Stay updated on matches, messages, and upcoming sessions
+- **Responsive Design** - Seamless experience across desktop, tablet, and mobile devices
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend
+- **React JS** - UI library for building interactive user interfaces (Primary Framework)
+- **React Router** - Client-side routing for navigation
+- **Axios** - HTTP client for API communication
+- **Tailwind CSS** - Utility-first CSS framework for styling
+- **React Icons** - Icon library for UI elements
 
-### `npm test`
+### Backend
+- **Spring Boot** - Java-based framework for building REST APIs (Primary Framework)
+- **Spring Data JPA** - ORM for database operations
+- **Spring Security** - Authentication and authorization
+- **JWT (JSON Web Tokens)** - Secure token-based authentication
+- **Maven** - Dependency management and project building
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Database
+- **MySQL** - Relational database for data persistence (Primary Framework)
+- **Supabase** - PostgreSQL-based backend (future migration)
 
-### `npm run build`
+### Additional Tools
+- **Git & GitHub** - Version control and repository hosting
+- **Postman** - API testing and documentation
+- **Docker** - Containerization (optional, for deployment)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🚀 Setup & Run Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+Before you begin, make sure you have the following installed on your computer:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Node.js** (includes npm)
+   - Download from: https://nodejs.org/ (LTS version recommended)
+   - Verify installation: Open terminal/command prompt and run `node --version` and `npm --version`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. **Java Development Kit (JDK)** 
+   - Download from: https://www.oracle.com/java/technologies/downloads/ (JDK 11 or higher)
+   - Verify installation: Run `java --version` in terminal/command prompt
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **MySQL Server**
+   - Download from: https://dev.mysql.com/downloads/mysql/
+   - Install and note your username (default: `root`) and password
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. **Git**
+   - Download from: https://git-scm.com/
+   - Verify installation: Run `git --version`
 
-## Learn More
+5. **Text Editor or IDE** (Optional but recommended)
+   - Visual Studio Code: https://code.visualstudio.com/
+   - IntelliJ IDEA Community Edition: https://www.jetbrains.com/idea/
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Step 1: Clone the Repository
 
-### Code Splitting
+```bash
+git clone https://github.com/yourusername/skillswap.git
+cd skillswap
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+### Step 2: Backend Setup (Spring Boot)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### 2.1 Navigate to Backend Directory
+```bash
+cd backend
+```
 
-### Making a Progressive Web App
+#### 2.2 Configure Database Connection
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Open the file: `src/main/resources/application.properties`
+2. Update the following with your MySQL credentials:
 
-### Advanced Configuration
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/skillswap_db
+spring.datasource.username=root
+spring.datasource.password=your_mysql_password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+```
 
-### Deployment
+**Note:** Replace `your_mysql_password` with your actual MySQL password
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### 2.3 Create the Database
 
-### `npm run build` fails to minify
+Open MySQL command line or MySQL Workbench and run:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```sql
+CREATE DATABASE skillswap_db;
+```
+
+#### 2.4 Build and Run Backend
+
+```bash
+# Build the project
+mvn clean install
+
+# Run the application
+mvn spring-boot:run
+```
+
+You should see output ending with: `Started SkillSwapApplication in X seconds`
+
+✅ **Backend is now running on:** `http://localhost:8080`
+
+---
+
+### Step 3: Frontend Setup (React)
+
+#### 3.1 Navigate to Frontend Directory
+
+```bash
+# Go back to root directory first (if still in backend)
+cd ..
+
+# Navigate to frontend
+cd frontend
+```
+
+#### 3.2 Install Dependencies
+
+```bash
+npm install
+```
+
+This will download all required packages (takes 2-5 minutes depending on internet speed)
+
+#### 3.3 Configure API Endpoint
+
+1. Create a `.env` file in the `frontend` directory
+2. Add the following:
+
+```
+REACT_APP_API_URL=http://localhost:8080/api
+```
+
+#### 3.4 Start the Development Server
+
+```bash
+npm start
+```
+
+Your browser will automatically open to: `http://localhost:3000`
+
+✅ **Frontend is now running on:** `http://localhost:3000`
+
+---
+
+### Step 4: Verify Everything is Working
+
+1. **Check Backend API:**
+   - Open: `http://localhost:8080/api/health`
+   - You should see a success response
+
+2. **Check Frontend:**
+   - Navigate to: `http://localhost:3000`
+   - You should see the SkillSwap landing page
+   - Try logging in or creating an account
+
+3. **Test API Connection:**
+   - Open browser Developer Tools (F12)
+   - Go to Network tab
+   - Perform any action on the frontend
+   - You should see successful API calls to `localhost:8080`
+
+---
+
+## 📁 Project Structure
+
+```
+skillswap/
+├── backend/                          # Spring Boot Backend
+│   ├── src/main/java/com/skillswap/
+│   │   ├── controller/               # REST API endpoints
+│   │   ├── service/                  # Business logic
+│   │   ├── repository/               # Database access
+│   │   ├── model/                    # Entity classes
+│   │   └── config/                   # Configuration classes
+│   ├── src/main/resources/
+│   │   └── application.properties    # Database & server config
+│   └── pom.xml                       # Maven dependencies
+│
+├── frontend/                         # React Frontend
+│   ├── src/
+│   │   ├── components/               # Reusable UI components
+│   │   ├── pages/                    # Page components
+│   │   ├── services/                 # API service calls
+│   │   ├── App.js                    # Main component
+│   │   └── index.js                  # Entry point
+│   ├── public/                       # Static files
+│   ├── package.json                  # Dependencies
+│   └── .env                          # Environment variables
+│
+└── README.md                         # This file
+```
+
+---
+
+## 🔧 Troubleshooting
+
+### Frontend won't start
+- **Error:** `npm: command not found`
+  - **Solution:** Node.js is not installed. Download from https://nodejs.org/
+  
+- **Error:** `Port 3000 is already in use`
+  - **Solution:** Close other applications using port 3000 or run: `npm start -- --port 3001`
+
+### Backend won't start
+- **Error:** `Could not connect to database`
+  - **Solution:** Make sure MySQL is running and your credentials in `application.properties` are correct
+  
+- **Error:** `Java command not found`
+  - **Solution:** JDK is not installed. Download from https://www.oracle.com/java/technologies/downloads/
+
+### API calls failing
+- **Error:** `CORS error or 404 Not Found`
+  - **Solution:** Make sure both frontend and backend are running on their respective ports
+  - Check that `.env` file in frontend has correct `REACT_APP_API_URL`
+
+### Database issues
+- **Error:** `Access denied for user 'root'@'localhost'`
+  - **Solution:** Check your MySQL password is correct in `application.properties`
+
+---
+
+## 📦 Available Scripts
+
+### Frontend Commands
+```bash
+npm start          # Start development server
+npm run build      # Create production build
+npm test           # Run tests
+npm run eject      # Eject from Create React App (not reversible)
+```
+
+### Backend Commands
+```bash
+mvn clean install  # Clean and build project
+mvn spring-boot:run    # Run application
+mvn test           # Run tests
+```
+
+---
+
+## 🌐 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
+
+### Users
+- `GET /api/users/{id}` - Get user profile
+- `PUT /api/users/{id}` - Update user profile
+- `GET /api/users/{id}/skills` - Get user's skills
+
+### Skills
+- `POST /api/skills` - Create skill offering
+- `GET /api/skills` - Browse all skills
+- `GET /api/skills/search` - Search skills
+
+### Matches & Exchanges
+- `GET /api/matches` - Get skill matches
+- `POST /api/exchanges` - Create skill exchange
+- `GET /api/exchanges` - View exchanges
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how to get started:
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes
+4. Commit: `git commit -m 'Add your feature description'`
+5. Push: `git push origin feature/your-feature-name`
+6. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+## 👥 Team
+
+- **Project Lead:** Sang'gre Terra
+- **Backend Developer:** Eron Asia
+- **Frontend Developer/Designer:** TBD (Looking for one)
+
+---
+
+## 📞 Contact & Support
+
+- **Email:** support@skillswap.com
+- **GitHub Issues:** https://github.com/sanggreterra/skillswap/issues
+- **Discord:** https://discord.gg/2WAkkChQ
+
+---
+
+## 🎉 Thank You!
+
+Thank you for being part of the SkillSwap community! We're excited to help you build meaningful learning connections. Happy skill-sharing! 🚀
