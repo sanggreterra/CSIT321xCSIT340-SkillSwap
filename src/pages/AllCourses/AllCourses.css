@@ -1,4 +1,127 @@
-.page-container {
-  padding: 120px 312px;
-  text-align: center;
+.all-courses-page {
+  background: #f9fafb;
+  padding: 80px 0;
+  font-family: 'Public Sans', sans-serif;
+}
+
+.page-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.all-courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.page-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #212b36;
+}
+
+.page-sub {
+  color: #637381;
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.filter-btn {
+  background: #00ab55;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #007a3b;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+}
+
+.card-media img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-author {
+  font-size: 14px;
+  color: #637381;
+  margin-bottom: 4px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #212b36;
+  margin-bottom: 12px;
+}
+
+.card-meta {
+  display: flex;
+  gap: 12px;
+  color: #637381;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.meta-dot::before {
+  content: "•";
+  margin-right: 6px;
+  color: #00ab55;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.availability {
+  background: #e6f6ee;
+  color: #00ab55;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.details-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #212b36;
+  transition: color 0.2s ease;
+}
+
+.details-link:hover {
+  color: #00ab55;
 }
