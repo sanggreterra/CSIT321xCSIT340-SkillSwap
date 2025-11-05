@@ -99,8 +99,9 @@ img {
 button:focus,
 input:focus,
 a:focus {
-  outline: 2px solid #00AB55;
-  outline-offset: 2px;
+	outline: none;
+ /* outline: 2px solid #00AB55;
+  outline-offset: 2px; */
 }
 
 /* Smooth Scrolling */

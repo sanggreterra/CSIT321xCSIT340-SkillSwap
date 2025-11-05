@@ -25,6 +25,7 @@
 .logo-icon {
   width: 40px;
   height: 40px;
+  padding-top: 10px;
 }
 
 .logo-text {
@@ -35,8 +36,13 @@
   color: #005249;
 }
 
+.logo svg {
+	vertical-align: middle;
+}
+
 .search-container {
   flex: 1;
+  align-items: center;
   max-width: 400px;
 }
 
@@ -61,6 +67,7 @@
   flex: 1;
   border: none;
   outline: none;
+  box-shadow: none;
   background: transparent;
   font-family: 'Questrial', sans-serif;
   font-weight: 400;
@@ -72,6 +79,7 @@
 .search-input::placeholder {
   color: #637381;
 }
+nav ul { gap: 32px; }
 
 .nav-items {
   display: flex;
