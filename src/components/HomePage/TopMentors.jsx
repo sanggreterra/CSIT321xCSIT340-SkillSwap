@@ -13,7 +13,7 @@ const TopMentors = () => {
     },
     {
       id: 2,
-      name: 'Jason Nabunturan',
+      name: 'Jason Smith',
       title: 'Business Analyst',
       rating: 4.9,
       mentees: 14,
@@ -25,11 +25,11 @@ const TopMentors = () => {
       title: 'UI/UX Designer',
       rating: 4.8,
       mentees: 42,
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=244&h=244&fit=crop&crop=face'
+      image: 'https://images.unsplash.com/photo-1735424080768-8730f9c8a0e9?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
     },
     {
       id: 4,
-      name: 'Kazu Arts',
+      name: 'Alisson Doe',
       title: 'Multimedia Artist',
       rating: 4.7,
       mentees: 21,

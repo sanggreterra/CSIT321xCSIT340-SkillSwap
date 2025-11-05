@@ -5,31 +5,31 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Al Den',
+      name: 'Mira Santos',
       title: 'Accountancy Student',
-      text: 'I must explain to you how all this mistaken . Tdea of denouncing pleasure and praising pain was born and I will give you a complete account of the system and expound',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&h=48&fit=crop&crop=face'
+      text: 'SkillSwap helped me gain real-world insight into the industry. My mentor guided me patiently and shared techniques I couldn’t have learned from school alone.',
+      avatar: 'https://images.unsplash.com/photo-1590702841774-45166f031529?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687'
     },
     {
       id: 2,
-      name: 'Josh Cullen',
+      name: 'Eli Tan',
       title: 'Junior Developer',
-      text: 'I must explain to you how all this mistaken . Tdea of denouncing pleasure and praising pain was born and I will give you a complete account of the system and expound',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=48&h=48&fit=crop&crop=face'
+      text: 'I really enjoyed how interactive the mentoring sessions were. My mentor gave me honest feedback and practical advice that boosted my confidence as a developer.',
+      avatar: 'https://images.unsplash.com/photo-1686543972602-da0c7ea61ce2?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687'
     },
     {
       id: 3,
-      name: 'Nayeon',
+      name: 'Rina Park',
       title: 'Startup Artist',
-      text: 'I must explain to you how all this mistaken . Tdea of denouncing pleasure and praising pain was born and I will give you a complete account of the system and expound',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=48&h=48&fit=crop&crop=face'
+      text: 'SkillSwap made learning fun and inspiring! I met creative people who encouraged me to push my ideas further and build a stronger artistic portfolio.',
+      avatar: 'https://images.unsplash.com/photo-1724134619553-84dea553f0ff?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687'
     },
     {
       id: 4,
-      name: 'Silvanna Alawi',
+      name: 'Noah Dela Cruz',
       title: 'IT Student',
-      text: 'The skills that I learned are crucial for my development. The mentors truly taught me the skill the he/she is expert on.',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=48&h=48&fit=crop&crop=face'
+      text: 'The skills I learned here were crucial for my growth. My mentor genuinely cared about my progress and helped me apply my knowledge in real projects.',
+      avatar: 'https://images.unsplash.com/photo-1618616153864-f1251396e07a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687'
     }
   ];
 

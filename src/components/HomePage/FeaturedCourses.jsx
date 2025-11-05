@@ -11,7 +11,7 @@ const FeaturedCourses = () => {
       level: 'Intermediate',
       status: 'Available',
       statusColor: '#55BE24',
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/mJbWNLb.jpg'
     },
     {
       id: 2,
@@ -21,7 +21,7 @@ const FeaturedCourses = () => {
       level: 'Beginner-Intermediate',
       status: 'Available',
       statusColor: '#55BE24',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/5pVGbF0.jpg'
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ const FeaturedCourses = () => {
       level: 'Beginner',
       status: 'Available',
       statusColor: '#55BE24',
-      image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/T1TrfDr.jpg'
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ const FeaturedCourses = () => {
       level: 'Beginner-Intermediate',
       status: 'Not Available',
       statusColor: '#BE2424',
-      image: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/UhcLcpN.jpg'
     },
     {
       id: 5,
@@ -51,7 +51,7 @@ const FeaturedCourses = () => {
       level: 'Advanced',
       status: 'Available',
       statusColor: '#55BE24',
-      image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/QOvsis1.jpg'
     },
     {
       id: 6,
@@ -61,7 +61,7 @@ const FeaturedCourses = () => {
       level: 'Beginner-Advanced',
       status: 'Available',
       statusColor: '#55BE24',
-      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/XX3Ln56.jpg'
     }
   ];
 

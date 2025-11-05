@@ -8,21 +8,21 @@ const LatestBlogs = () => {
       title: 'FabFest 2025: the Philippine Fablab Festival',
       date: 'August 29, 2025',
       description: 'With the theme "High Five: Bridging Gaps Through Innovation and Collaboration," this year\'s festival brings together MSMEs, creatives, makers, startups, and innovators for two days of learning, sharing, and hands-on experiences.',
-      image: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/cThcJEk.jpg'
     },
     {
       id: 2,
       title: 'UXPH Mini 2025: Design for the Future',
       date: 'September 30, 2025',
       description: 'UXPH Mini is a grassroots event that brings design conversations and diverse learning opportunities to the creative communities across the islands.',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/lpCqsNU.jpg'
     },
     {
       id: 3,
       title: 'How to Ace Hackatons',
       date: 'October 1, 2025',
       description: 'Hackathons aren\'t just for show. They\'ve birthed real products, startups, and features you probably use.',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=410&h=250&fit=crop'
+      image: 'https://i.imgur.com/iuKdhkh.jpg'
     }
   ];
 
