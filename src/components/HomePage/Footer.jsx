@@ -9,10 +9,11 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-content">
-          <div className="footer-section">
+          
+		  <div className="footer-section">
             <div className="footer-logo">
               <div className="logo-icon">
-              <img src={SkillSwapLogo} alt="SkillSwap Logo" width={40} height={40} />
+              <img src={SkillSwapLogo} alt="SkillSwap Logo"/>
               </div>
               <span className="logo-text">SKILLSWAP</span>
             </div>

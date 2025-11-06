@@ -7,7 +7,7 @@
 .page-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 40px 0 32px;
 }
 
 .all-courses-header {
@@ -18,15 +18,16 @@
 }
 
 .page-title {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Public Sans', sans-serif;
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
   color: #212b36;
 }
 
 .page-sub {
   color: #637381;
   font-size: 16px;
+  font-weight: 600;
   margin-top: 4px;
 }
 
@@ -47,8 +48,21 @@
 
 .courses-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* fixed 3-column grid */
   gap: 24px;
+}
+
+/* Responsive fix */
+@media (max-width: 1024px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .course-card {
@@ -88,16 +102,21 @@
 
 .card-meta {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  align-items: center;
   color: #637381;
   font-size: 14px;
-  margin-bottom: 12px;
 }
 
-.meta-dot::before {
-  content: "•";
-  margin-right: 6px;
-  color: #00ab55;
+.meta-item {
+  display: flex;
+  align-items: center;
+}
+
+.card-divider {
+  border: none;
+  border-top: 1px solid rgba(145, 158, 171, 0.24);
+  margin: 12px 0 16px;
 }
 
 .card-footer {

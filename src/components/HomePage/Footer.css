@@ -4,9 +4,9 @@
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 60px;
 }
 
 .footer-content {
@@ -29,8 +29,8 @@
 }
 
 .logo-icon {
-  width: 64px;
-  height: 64px;
+  width: 100px;
+  height: 100px;
 }
 
 .logo-text {
