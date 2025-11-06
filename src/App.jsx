@@ -18,10 +18,12 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import Settings from "./pages/Settings/Settings";
 import Logout from "./pages/Logout/Logout";
 import "./App.css";
+import { usePageMeta } from "./hooks/usePageMeta";
 
 function App() {
   const HomePage = () => (
     <>
+      {usePageMeta('Home')}
       <Header />
       <HeroSection />
       <CategoriesSection />

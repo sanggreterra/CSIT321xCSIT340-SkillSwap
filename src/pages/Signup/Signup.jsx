@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
+import { usePageMeta } from '../../hooks/usePageMeta';
 
 const Signup = () => {
+  usePageMeta('Signup');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',

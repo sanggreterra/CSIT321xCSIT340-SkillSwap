@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../../components/HomePage/Header";
 import Footer from "../../components/HomePage/Footer";
 import "./AllCourses.css";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const sampleCourses = [
   {
@@ -55,6 +56,7 @@ const sampleCourses = [
 ];
 
 export default function AllCourses() {
+  usePageMeta('All Courses');
   return (
     <>
       <Header />
