@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <header className="header">
       <div className="header-container">
@@ -26,20 +28,20 @@ const Header = () => {
 
         {/* Navigation */}
         <nav className="nav-items">
-          <a href="#" className="nav-item">Home</a>
-          <a href="#" className="nav-item">
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/'); }}>Home</a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/courses'); }}>
             Skills
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4 6L8 10L12 6" stroke="#3C3C3C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>
-          <a href="#" className="nav-item">About Us</a>
+          <a href="#" className="nav-item" onClick={(e) => { e.preventDefault(); navigate('/'); }}>About Us</a>
         </nav>
 
         {/* Buttons */}
         <div className="header-buttons">
-          <button className="btn-outline" onClick={() => window.location.hash = '#signup'}>Register</button>
-          <button className="btn-primary" onClick={() => window.location.hash = '#login'}>
+          <button className="btn-outline" onClick={() => navigate('/signup')}>Register</button>
+          <button className="btn-primary" onClick={() => navigate('/login')}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="white"/>
               <path d="M8 10C5.79086 10 4 11.7909 4 14V16H12V14C12 11.7909 10.2091 10 8 10Z" fill="white"/>

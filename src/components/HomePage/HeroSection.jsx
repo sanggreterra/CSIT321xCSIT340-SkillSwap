@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './HeroSection.css';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="hero-section">
       <div className="hero-background">
@@ -20,7 +22,7 @@ const HeroSection = () => {
             <p className="hero-subtitle">
               SkillSwap connects you with people in your community who want to share their knowledge and learn from yours. No expensive courses, no impersonal videos - just real people teaching real skills through meaningful exchanges.
             </p>
-            <button className="hero-cta">
+            <button className="hero-cta" onClick={() => navigate('/signup')}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="white"/>
                 <path d="M8 8C10.2091 8 12 6.20914 12 4C12 1.79086 10.2091 0 8 0C5.79086 0 4 1.79086 4 4C4 6.20914 5.79086 8 8 8Z" fill="white"/>

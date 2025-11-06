@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AboutSection.css';
 
 const AboutSection = () => {
+  const navigate = useNavigate();
   const features = [
     'Smart Matching',
     'Flexible Learning',
@@ -10,7 +12,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="about-section">
+    <section className="about-section" id="about">
       <div className="about-container">
         <div className="about-image">
           <img 
@@ -37,7 +39,7 @@ const AboutSection = () => {
                 </div>
               ))}
             </div>
-            <button className="about-cta">
+            <button className="about-cta" onClick={() => navigate('/courses')}>
               Browse all skill courses
             </button>
           </div>

@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './CategoriesSection.css';
 
 const CategoriesSection = () => {
+  const navigate = useNavigate();
   const categories = [
     { name: 'Mathematics & Logic', courses: 30, color: 'secondary', icon: '🧮' },
     { name: 'Business', courses: 52, color: 'success', icon: '💼' },
@@ -47,7 +49,7 @@ const CategoriesSection = () => {
         
         <div className="categories-footer">
           <p className="categories-subtitle">We have more categories & subcategories.</p>
-          <button className="browse-all-btn">
+          <button className="browse-all-btn" onClick={() => navigate('/courses')}>
             Browse All
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#00AB55" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

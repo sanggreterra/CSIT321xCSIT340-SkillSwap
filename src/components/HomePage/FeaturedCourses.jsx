@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './FeaturedCourses.css';
 
 const FeaturedCourses = () => {
+  const navigate = useNavigate();
   const courses = [
     {
       id: 1,
@@ -73,7 +75,7 @@ const FeaturedCourses = () => {
             <h2 className="courses-title">Featured Skill Courses</h2>
             <p className="courses-subtitle">Explore our Popular Skill Courses</p>
           </div>
-          <button className="all-courses-btn">All courses</button>
+          <button className="all-courses-btn" onClick={() => navigate('/courses')}>All courses</button>
         </div>
         
         <div className="courses-grid">
@@ -110,7 +112,7 @@ const FeaturedCourses = () => {
                       {course.status}
                     </span>
                   </div>
-                  <button className="view-details-btn">View Details</button>
+                  <button className="view-details-btn" onClick={() => navigate(`/courses/${course.id}`)}>View Details</button>
                 </div>
               </div>
             </div>

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Footer.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -22,20 +24,20 @@ const Footer = () => {
           <div className="footer-section">
             <h3 className="footer-title">GET HELP</h3>
             <div className="footer-links">
-              <a href="#" className="footer-link">Contact Us</a>
-              <a href="#" className="footer-link">Latest Blog</a>
-              <a href="#" className="footer-link">FAQ</a>
-              <a href="#" className="footer-link">Privacy</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/'); }}>Contact Us</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/'); }}>Latest Blog</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/'); }}>FAQ</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/'); }}>Privacy</a>
             </div>
           </div>
           
           <div className="footer-section">
             <h3 className="footer-title">Categories</h3>
             <div className="footer-links">
-              <a href="#" className="footer-link">Art & Design</a>
-              <a href="#" className="footer-link">Business</a>
-              <a href="#" className="footer-link">Technology</a>
-              <a href="#" className="footer-link">Careers</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/courses'); }}>Art & Design</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/courses'); }}>Business</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/courses'); }}>Technology</a>
+              <a href="#" className="footer-link" onClick={(e) => { e.preventDefault(); navigate('/courses'); }}>Careers</a>
             </div>
           </div>
           

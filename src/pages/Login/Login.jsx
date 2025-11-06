@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -133,7 +135,7 @@ const Login = () => {
 
             <div className="signup-link">
               <span>Don't have an account? </span>
-              <button onClick={() => window.location.hash = '#signup'} className="signup-text">Sign up</button>
+              <button onClick={() => navigate('/signup')} className="signup-text">Sign up</button>
             </div>
           </div>
         </div>
