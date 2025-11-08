@@ -1,0 +1,194 @@
+flowchart TD
+    Start([User Visits SkillSwap]) --> CheckAuth{User Authenticated?}
+    
+    %% Registration/Login Flow
+    CheckAuth -->|No| RegOrLogin{Register or Login?}
+    RegOrLogin -->|Register| Register[Fill Registration Form]
+    Register --> ValidateReg{Valid Registration Data?}
+    ValidateReg -->|No| RegError[Display Validation Errors]
+    RegError --> Register
+    ValidateReg -->|Yes| CreateAccount[Create User Account]
+    CreateAccount --> SendVerification[Send Verification Email]
+    SendVerification --> VerifyEmail{Email Verified?}
+    VerifyEmail -->|No| WaitVerification[Wait for Email Verification]
+    WaitVerification --> VerifyEmail
+    VerifyEmail -->|Yes| LoginSuccess
+    
+    RegOrLogin -->|Login| Login[Enter Credentials]
+    Login --> ValidateLogin{Valid Credentials?}
+    ValidateLogin -->|No| LoginError[Display Login Error]
+    LoginError --> Login
+    ValidateLogin -->|Yes| LoginSuccess[Create User Session]
+    
+    CheckAuth -->|Yes| Dashboard
+    LoginSuccess --> Dashboard
+    
+    %% Dashboard and Profile Setup
+    Dashboard[Display Dashboard] --> CheckProfile{Profile Complete?}
+    CheckProfile -->|No| CompleteProfile[Complete Profile Information]
+    CompleteProfile --> AddBio[Add Bio and Profile Picture]
+    AddBio --> SetLocation[Set Location Preferences]
+    SetLocation --> ProfileComplete
+    CheckProfile -->|Yes| ProfileComplete[Profile Ready]
+    
+    ProfileComplete --> MainMenu{Choose Action}
+    
+    %% Skill Offering Flow
+    MainMenu -->|Create Skill Offering| CreateOffering[Navigate to Create Offering]
+    CreateOffering --> SelectSkillOffer[Select Skill from Catalog]
+    SelectSkillOffer --> EnterOfferingDetails[Enter Offering Details]
+    EnterOfferingDetails --> SetAvailability[Set Availability and Preferences]
+    SetAvailability --> SaveOffering[Save Skill Offering]
+    SaveOffering --> OfferingSaved[Offering Published]
+    OfferingSaved --> MainMenu
+    
+    %% Skill Request Flow
+    MainMenu -->|Create Skill Request| CreateRequest[Navigate to Create Request]
+    CreateRequest --> SelectSkillRequest[Select Skill to Learn]
+    SelectSkillRequest --> EnterRequestDetails[Enter Request Details]
+    EnterRequestDetails --> SetPreferences[Set Learning Preferences]
+    SetPreferences --> SaveRequest[Save Skill Request]
+    SaveRequest --> TriggerMatching[Trigger Matching Algorithm]
+    TriggerMatching --> RequestSaved[Request Published]
+    RequestSaved --> MainMenu
+    
+    %% Browse and Search Flow
+    MainMenu -->|Browse Skills| BrowseSkills[Display Available Skills]
+    BrowseSkills --> FilterSkills{Apply Filters?}
+    FilterSkills -->|Yes| ApplyFilters[Filter by Category/Location]
+    ApplyFilters --> DisplayFiltered[Display Filtered Results]
+    FilterSkills -->|No| DisplayFiltered
+    DisplayFiltered --> SelectSkill{Select a Skill?}
+    SelectSkill -->|Yes| ViewSkillDetails[View Skill Details]
+    ViewSkillDetails --> ContactUser[Send Message to User]
+    ContactUser --> MainMenu
+    SelectSkill -->|No| MainMenu
+    
+    %% Matching System Flow
+    MainMenu -->|View Matches| ViewMatches[Display Skill Matches]
+    ViewMatches --> CheckMatches{Matches Available?}
+    CheckMatches -->|No| NoMatches[Display No Matches Message]
+    NoMatches --> MainMenu
+    CheckMatches -->|Yes| ReviewMatches[Review Match Suggestions]
+    ReviewMatches --> SelectMatch{Select a Match?}
+    SelectMatch -->|No| MainMenu
+    SelectMatch -->|Yes| ViewMatchDetails[View Match Profile]
+    ViewMatchDetails --> DecideMatch{Accept Match?}
+    DecideMatch -->|No| MainMenu
+    DecideMatch -->|Yes| SendExchangeRequest[Send Exchange Request]
+    
+    %% Exchange Request Flow
+    SendExchangeRequest --> NotifyOtherUser[Notify Matched User]
+    NotifyOtherUser --> WaitResponse{Wait for Response}
+    WaitResponse -->|Declined| RequestDeclined[Exchange Request Declined]
+    RequestDeclined --> MainMenu
+    WaitResponse -->|Accepted| ExchangeAccepted[Exchange Request Accepted]
+    ExchangeAccepted --> CreateExchange[Create Skill Exchange]
+    
+    %% Messaging Flow
+    MainMenu -->|Check Messages| ViewMessages[Display Messages]
+    ViewMessages --> SelectConversation{Select Conversation?}
+    SelectConversation -->|No| MainMenu
+    SelectConversation -->|Yes| OpenChat[Open Chat Window]
+    OpenChat --> ReadMessages[Read Messages]
+    ReadMessages --> SendMessage{Send Message?}
+    SendMessage -->|Yes| ComposeMessage[Compose and Send Message]
+    ComposeMessage --> MessageSent[Message Delivered]
+    MessageSent --> OpenChat
+    SendMessage -->|No| MainMenu
+    
+    %% Scheduling Flow
+    CreateExchange --> ScheduleSession[Open Scheduling Interface]
+    ScheduleSession --> ProposeDateTime[Propose Date and Time]
+    ProposeDateTime --> SendProposal[Send Proposal to Partner]
+    SendProposal --> PartnerResponse{Partner Accepts?}
+    PartnerResponse -->|No| RescheduleRequest[Request Reschedule]
+    RescheduleRequest --> ProposeDateTime
+    PartnerResponse -->|Yes| ConfirmSchedule[Confirm Schedule]
+    ConfirmSchedule --> CreateCalendarEvent[Create Calendar Event]
+    CreateCalendarEvent --> SendReminders[Set Up Reminders]
+    SendReminders --> SessionScheduled[Session Scheduled]
+    
+    %% Session Preparation Flow
+    SessionScheduled --> WaitForSession[Wait for Session Date]
+    WaitForSession --> SessionReminder[Receive Session Reminder]
+    SessionReminder --> SessionDay{Session Day Arrived?}
+    SessionDay -->|No| WaitForSession
+    SessionDay -->|Yes| ConductSession[Conduct Skill Exchange Session]
+    
+    %% Session Completion Flow
+    ConductSession --> SessionComplete[Complete Session]
+    SessionComplete --> UpdateExchangeStatus[Update Exchange Status to Completed]
+    UpdateExchangeStatus --> PromptRating[Prompt for Rating and Review]
+    PromptRating --> DecideRating{Provide Rating?}
+    DecideRating -->|No| SkipRating[Skip Rating]
+    SkipRating --> MainMenu
+    DecideRating -->|Yes| SubmitRating[Rate Partner 1-5 Stars]
+    SubmitRating --> WriteReview[Write Review Text]
+    WriteReview --> SaveReview[Save Rating and Review]
+    SaveReview --> NotifyPartner[Notify Partner of Review]
+    NotifyPartner --> UpdateUserProfile[Update User Profile Stats]
+    UpdateUserProfile --> MainMenu
+    
+    %% View Profile and Stats Flow
+    MainMenu -->|View Profile| ViewOwnProfile[Display User Profile]
+    ViewOwnProfile --> ShowStats[Show Statistics]
+    ShowStats --> ShowRatings[Display Ratings and Reviews]
+    ShowRatings --> ShowExchangeHistory[Show Exchange History]
+    ShowExchangeHistory --> EditProfileOption{Edit Profile?}
+    EditProfileOption -->|Yes| EditProfile[Edit Profile Information]
+    EditProfile --> SaveProfile[Save Profile Changes]
+    SaveProfile --> MainMenu
+    EditProfileOption -->|No| MainMenu
+    
+    %% Calendar Management Flow
+    MainMenu -->|View Calendar| ViewCalendar[Display Calendar Events]
+    ViewCalendar --> ShowUpcoming[Show Upcoming Sessions]
+    ShowUpcoming --> ManageEvents{Manage Events?}
+    ManageEvents -->|Reschedule| RequestReschedule[Request Session Reschedule]
+    RequestReschedule --> MainMenu
+    ManageEvents -->|Cancel| CancelSession[Cancel Session]
+    CancelSession --> NotifyPartnerCancel[Notify Partner of Cancellation]
+    NotifyPartnerCancel --> MainMenu
+    ManageEvents -->|No Changes| MainMenu
+    
+    %% Reporting Flow
+    MainMenu -->|Report Issue| CreateReport[Create Report]
+    CreateReport --> SelectReportType[Select Report Type]
+    SelectReportType --> EnterReportDetails[Enter Report Description]
+    EnterReportDetails --> SubmitReport[Submit Report to Admin]
+    SubmitReport --> ReportConfirmation[Report Submitted]
+    ReportConfirmation --> MainMenu
+    
+    %% Admin Flow
+    MainMenu -->|Admin Access| CheckAdmin{Is Admin User?}
+    CheckAdmin -->|No| MainMenu
+    CheckAdmin -->|Yes| AdminDashboard[Display Admin Dashboard]
+    AdminDashboard --> AdminAction{Select Admin Action}
+    AdminAction -->|View Reports| ReviewReports[Review User Reports]
+    ReviewReports --> HandleReport[Investigate and Resolve]
+    HandleReport --> UpdateReportStatus[Update Report Status]
+    UpdateReportStatus --> AdminDashboard
+    AdminAction -->|Manage Users| ManageUsers[View and Manage Users]
+    ManageUsers --> ModerateUsers[Moderate User Accounts]
+    ModerateUsers --> AdminDashboard
+    AdminAction -->|View Stats| ViewPlatformStats[View Platform Statistics]
+    ViewPlatformStats --> AdminDashboard
+    AdminAction -->|Logout| Logout
+    
+    %% Logout Flow
+    MainMenu -->|Logout| Logout[End User Session]
+    Logout --> ClearSession[Clear Session Data]
+    ClearSession --> End([Return to Home Page])
+    
+    %% Styling
+    classDef startEnd fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px
+    classDef decision fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef success fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px
+    
+    class Start,End startEnd
+    class CheckAuth,RegOrLogin,ValidateReg,ValidateLogin,CheckProfile,MainMenu,FilterSkills,SelectSkill,CheckMatches,SelectMatch,DecideMatch,WaitResponse,SelectConversation,SendMessage,PartnerResponse,SessionDay,DecideRating,EditProfileOption,ManageEvents,CheckAdmin,AdminAction decision
+    class LoginSuccess,OfferingSaved,RequestSaved,SessionScheduled,SaveReview,ReportConfirmation success
+    class RegError,LoginError,RequestDeclined,NoMatches error

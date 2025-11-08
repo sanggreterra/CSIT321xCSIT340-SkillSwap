@@ -1,0 +1,287 @@
+classDiagram
+    class User {
+        -Integer userId
+        -String email
+        -String password
+        -String firstName
+        -String lastName
+        -String profilePicture
+        -String bio
+        -String location
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        -Boolean isActive
+        -String socialMediaAccounts
+        +getUserId() Integer
+        +setUserId(Integer) void
+        +getEmail() String
+        +setEmail(String) void
+        +getPassword() String
+        +setPassword(String) void
+        +getFirstName() String
+        +setFirstName(String) void
+        +getLastName() String
+        +setLastName(String) void
+        +getProfilePicture() String
+        +setProfilePicture(String) void
+        +getBio() String
+        +setBio(String) void
+        +getLocation() String
+        +setLocation(String) void
+        +getCreatedAt() LocalDateTime
+        +getUpdatedAt() LocalDateTime
+        +getIsActive() Boolean
+        +setIsActive(Boolean) void
+        +getSocialMediaAccounts() String
+        +setSocialMediaAccounts(String) void
+    }
+
+    class Skill {
+        -Integer skillId
+        -String skillName
+        -String category
+        -String description
+        -LocalDateTime createdAt
+        +getSkillId() Integer
+        +setSkillId(Integer) void
+        +getSkillName() String
+        +setSkillName(String) void
+        +getCategory() String
+        +setCategory(String) void
+        +getDescription() String
+        +setDescription(String) void
+        +getCreatedAt() LocalDateTime
+    }
+
+    class SkillOffering {
+        -Integer offeringId
+        -String description
+        -String availability
+        -String learningMethod
+        -String locationPreference
+        -Boolean isActive
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        +getOfferingId() Integer
+        +setOfferingId(Integer) void
+        +getDescription() String
+        +setDescription(String) void
+        +getAvailability() String
+        +setAvailability(String) void
+        +getLearningMethod() String
+        +setLearningMethod(String) void
+        +getLocationPreference() String
+        +setLocationPreference(String) void
+        +getIsActive() Boolean
+        +setIsActive(Boolean) void
+        +getCreatedAt() LocalDateTime
+        +getUpdatedAt() LocalDateTime
+    }
+
+    class SkillRequest {
+        -Integer requestId
+        -String description
+        -String preferredLearningMethod
+        -String locationPreference
+        -Boolean isActive
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        +getRequestId() Integer
+        +setRequestId(Integer) void
+        +getDescription() String
+        +setDescription(String) void
+        +getPreferredLearningMethod() String
+        +setPreferredLearningMethod(String) void
+        +getLocationPreference() String
+        +setLocationPreference(String) void
+        +getIsActive() Boolean
+        +setIsActive(Boolean) void
+        +getCreatedAt() LocalDateTime
+        +getUpdatedAt() LocalDateTime
+    }
+
+    class SkillMatch {
+        -Integer matchId
+        -String matchStatus
+        -Float compatibilityScore
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        +getMatchId() Integer
+        +setMatchId(Integer) void
+        +getMatchStatus() String
+        +setMatchStatus(String) void
+        +getCompatibilityScore() Float
+        +setCompatibilityScore(Float) void
+        +getCreatedAt() LocalDateTime
+        +getUpdatedAt() LocalDateTime
+    }
+
+    class SkillExchange {
+        -Integer exchangeId
+        -LocalDateTime scheduledDate
+        -String exchangeStatus
+        -String sessionType
+        -String notes
+        -LocalDateTime createdAt
+        -LocalDateTime completedAt
+        +getExchangeId() Integer
+        +setExchangeId(Integer) void
+        +getScheduledDate() LocalDateTime
+        +setScheduledDate(LocalDateTime) void
+        +getExchangeStatus() String
+        +setExchangeStatus(String) void
+        +getSessionType() String
+        +setSessionType(String) void
+        +getNotes() String
+        +setNotes(String) void
+        +getCreatedAt() LocalDateTime
+        +getCompletedAt() LocalDateTime
+        +setCompletedAt(LocalDateTime) void
+    }
+
+    class Message {
+        -Integer messageId
+        -String messageContent
+        -Boolean isRead
+        -LocalDateTime sentAt
+        +getMessageId() Integer
+        +setMessageId(Integer) void
+        +getMessageContent() String
+        +setMessageContent(String) void
+        +getIsRead() Boolean
+        +setIsRead(Boolean) void
+        +getSentAt() LocalDateTime
+    }
+
+    class RatingReview {
+        -Integer ratingId
+        -Integer rating
+        -String reviewText
+        -LocalDateTime createdAt
+        +getRatingId() Integer
+        +setRatingId(Integer) void
+        +getRating() Integer
+        +setRating(Integer) void
+        +getReviewText() String
+        +setReviewText(String) void
+        +getCreatedAt() LocalDateTime
+    }
+
+    class CalendarEvent {
+        -Integer eventId
+        -String eventTitle
+        -LocalDateTime startTime
+        -LocalDateTime endTime
+        -String eventType
+        -Boolean isReminderSent
+        -LocalDateTime createdAt
+        +getEventId() Integer
+        +setEventId(Integer) void
+        +getEventTitle() String
+        +setEventTitle(String) void
+        +getStartTime() LocalDateTime
+        +setStartTime(LocalDateTime) void
+        +getEndTime() LocalDateTime
+        +setEndTime(LocalDateTime) void
+        +getEventType() String
+        +setEventType(String) void
+        +getIsReminderSent() Boolean
+        +setIsReminderSent(Boolean) void
+        +getCreatedAt() LocalDateTime
+    }
+
+    class AdminUser {
+        -Integer adminId
+        -String username
+        -String email
+        -String password
+        -String role
+        -LocalDateTime createdAt
+        -Boolean isActive
+        +getAdminId() Integer
+        +setAdminId(Integer) void
+        +getUsername() String
+        +setUsername(String) void
+        +getEmail() String
+        +setEmail(String) void
+        +getPassword() String
+        +setPassword(String) void
+        +getRole() String
+        +setRole(String) void
+        +getCreatedAt() LocalDateTime
+        +getIsActive() Boolean
+        +setIsActive(Boolean) void
+    }
+
+    class Report {
+        -Integer reportId
+        -String reportType
+        -String description
+        -String status
+        -LocalDateTime createdAt
+        -LocalDateTime resolvedAt
+        +getReportId() Integer
+        +setReportId(Integer) void
+        +getReportType() String
+        +setReportType(String) void
+        +getDescription() String
+        +setDescription(String) void
+        +getStatus() String
+        +setStatus(String) void
+        +getCreatedAt() LocalDateTime
+        +getResolvedAt() LocalDateTime
+        +setResolvedAt(LocalDateTime) void
+    }
+
+    class UserSession {
+        -Integer sessionId
+        -String sessionToken
+        -LocalDateTime createdAt
+        -LocalDateTime expiresAt
+        -Boolean isActive
+        +getSessionId() Integer
+        +setSessionId(Integer) void
+        +getSessionToken() String
+        +setSessionToken(String) void
+        +getCreatedAt() LocalDateTime
+        +getExpiresAt() LocalDateTime
+        +setExpiresAt(LocalDateTime) void
+        +getIsActive() Boolean
+        +setIsActive(Boolean) void
+    }
+
+    %% Relationships
+
+    %% User relationships
+    User "1" --> "0..*" SkillOffering : creates
+    User "1" --> "0..*" SkillRequest : creates
+    User "1" --> "0..*" Message : sends
+    User "1" --> "0..*" Message : receives
+    User "1" --> "0..*" RatingReview : gives
+    User "1" --> "0..*" RatingReview : receives
+    User "1" --> "0..*" CalendarEvent : owns
+    User "1" --> "0..*" Report : reports
+    User "1" --> "0..*" Report : is reported
+    User "1" --> "0..*" UserSession : has
+
+    %% Skill relationships
+    Skill "1" --> "0..*" SkillOffering : categorizes
+    Skill "1" --> "0..*" SkillRequest : categorizes
+
+    %% SkillOffering and SkillRequest relationships
+    SkillOffering "1" --> "0..*" SkillMatch : matched to
+    SkillRequest "1" --> "0..*" SkillMatch : matched with
+
+    %% SkillMatch relationships
+    SkillMatch "1" --> "1" SkillExchange : results in
+    SkillMatch "1" --> "2" User : involves
+
+    %% SkillExchange relationships
+    SkillExchange "1" --> "0..*" Message : discussion
+    SkillExchange "1" --> "0..1" RatingReview : evaluated by
+    SkillExchange "1" --> "0..*" CalendarEvent : scheduled as
+    SkillExchange "1" --> "0..*" Report : reported for
+    SkillExchange "1" --> "2" User : between
+
+    %% AdminUser relationships
+    AdminUser "1" --> "0..*" Report : handles

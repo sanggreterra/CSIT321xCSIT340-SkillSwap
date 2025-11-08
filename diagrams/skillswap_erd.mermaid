@@ -1,0 +1,164 @@
+erDiagram
+    USERS {
+        int user_id PK
+        string email UK
+        string password
+        string first_name
+        string last_name
+        string profile_picture
+        text bio
+        string location
+        datetime created_at
+        datetime updated_at
+        boolean is_active
+        string social_media_accounts
+    }
+
+    SKILLS {
+        int skill_id PK
+        string skill_name UK
+        string category
+        text description
+        datetime created_at
+    }
+
+    SKILL_OFFERINGS {
+        int offering_id PK
+        int user_id FK
+        int skill_id FK
+        text description
+        string availability
+        string learning_method
+        string location_preference
+        boolean is_active
+        datetime created_at
+        datetime updated_at
+    }
+
+    SKILL_REQUESTS {
+        int request_id PK
+        int user_id FK
+        int skill_id FK
+        text description
+        string preferred_learning_method
+        string location_preference
+        boolean is_active
+        datetime created_at
+        datetime updated_at
+    }
+
+    SKILL_MATCHES {
+        int match_id PK
+        int offering_id FK
+        int request_id FK
+        int offering_user_id FK
+        int requesting_user_id FK
+        string match_status
+        float compatibility_score
+        datetime created_at
+        datetime updated_at
+    }
+
+    SKILL_EXCHANGES {
+        int exchange_id PK
+        int match_id FK
+        int offering_user_id FK
+        int requesting_user_id FK
+        datetime scheduled_date
+        string exchange_status
+        string session_type
+        text notes
+        datetime created_at
+        datetime completed_at
+    }
+
+    MESSAGES {
+        int message_id PK
+        int sender_id FK
+        int receiver_id FK
+        int exchange_id FK
+        text message_content
+        boolean is_read
+        datetime sent_at
+    }
+
+    RATINGS_REVIEWS {
+        int rating_id PK
+        int exchange_id FK
+        int reviewer_id FK
+        int reviewee_id FK
+        int rating
+        text review_text
+        datetime created_at
+    }
+
+    CALENDAR_EVENTS {
+        int event_id PK
+        int user_id FK
+        int exchange_id FK
+        string event_title
+        datetime start_time
+        datetime end_time
+        string event_type
+        boolean is_reminder_sent
+        datetime created_at
+    }
+
+    ADMIN_USERS {
+        int admin_id PK
+        string username UK
+        string email UK
+        string password
+        string role
+        datetime created_at
+        boolean is_active
+    }
+
+    REPORTS {
+        int report_id PK
+        int reporter_id FK
+        int reported_user_id FK
+        int exchange_id FK
+        string report_type
+        text description
+        string status
+        int handled_by_admin FK
+        datetime created_at
+        datetime resolved_at
+    }
+
+    USER_SESSIONS {
+        int session_id PK
+        int user_id FK
+        string session_token
+        datetime created_at
+        datetime expires_at
+        boolean is_active
+    }
+
+    %% Relationships
+    USERS ||--o{ SKILL_OFFERINGS : "creates"
+    USERS ||--o{ SKILL_REQUESTS : "creates"
+    USERS ||--o{ MESSAGES : "sends"
+    USERS ||--o{ MESSAGES : "receives"
+    USERS ||--o{ RATINGS_REVIEWS : "gives"
+    USERS ||--o{ RATINGS_REVIEWS : "receives"
+    USERS ||--o{ CALENDAR_EVENTS : "owns"
+    USERS ||--o{ REPORTS : "reports"
+    USERS ||--o{ REPORTS : "is_reported"
+    USERS ||--o{ USER_SESSIONS : "has"
+
+    SKILLS ||--o{ SKILL_OFFERINGS : "categorizes"
+    SKILLS ||--o{ SKILL_REQUESTS : "categorizes"
+
+    SKILL_OFFERINGS ||--o{ SKILL_MATCHES : "matched_to"
+    SKILL_REQUESTS ||--o{ SKILL_MATCHES : "matched_with"
+
+    SKILL_MATCHES ||--|| SKILL_EXCHANGES : "results_in"
+
+    SKILL_EXCHANGES ||--o{ MESSAGES : "discussion"
+    SKILL_EXCHANGES ||--|| RATINGS_REVIEWS : "evaluated_by"
+    SKILL_EXCHANGES ||--o{ CALENDAR_EVENTS : "scheduled_as"
+    SKILL_EXCHANGES ||--o{ REPORTS : "reported_for"
+
+    ADMIN_USERS ||--o{ REPORTS : "handles"

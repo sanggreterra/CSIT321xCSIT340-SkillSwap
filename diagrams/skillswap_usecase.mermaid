@@ -1,0 +1,72 @@
+graph TB
+    %% Actors
+    User[👤 User]
+    Admin[👨‍💼 Admin]
+    Database[(🗄️ Database)]
+    
+    %% System Boundary
+    subgraph SkillSwap["SkillSwap Platform"]
+        %% User Use Cases
+        Login[Login]
+        Logout[Logout]
+        Register[Register Account]
+        CreateSkillOffering[Create Skill Offering]
+        CreateSkillRequest[Create Skill Request]
+        SearchSkills[Search Skills]
+        SendMessage[Send Message]
+        ScheduleExchange[Schedule Exchange]
+        RateUser[Rate User]
+        
+        %% Admin Use Cases
+        ManageUsers[Manage Users]
+        ModerateContent[Moderate Content]
+        
+        %% System Use Cases (includes)
+        ValidateUser[Validate User]
+        UpdateProfile[Update Profile]
+        MatchSkills[Match Skills]
+        StoreData[Store Data]
+        RetrieveData[Retrieve Data]
+    end
+    
+    %% User Relationships
+    User --> Login
+    User --> Logout
+    User --> Register
+    User --> CreateSkillOffering
+    User --> CreateSkillRequest
+    User --> SearchSkills
+    User --> SendMessage
+    User --> ScheduleExchange
+    User --> RateUser
+    
+    %% Admin Relationships
+    Admin --> Login
+    Admin --> ManageUsers
+    Admin --> ModerateContent
+    
+    %% Include Dependencies (dotted lines)
+    Login -.->|includes| ValidateUser
+    Register -.->|includes| ValidateUser
+    CreateSkillOffering -.->|includes| UpdateProfile
+    CreateSkillRequest -.->|includes| UpdateProfile
+    SearchSkills -.->|includes| MatchSkills
+    
+    %% Database Dependencies
+    ValidateUser -.-> Database
+    UpdateProfile -.-> Database
+    MatchSkills -.-> Database
+    StoreData -.-> Database
+    RetrieveData -.-> Database
+    
+    %% All dependency relationships are of type <<include>>
+    
+    %% Styling
+    classDef actor fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    classDef usecase fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1px,rx:20
+    classDef system fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    classDef database fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
+    
+    class User,Admin actor
+    class Login,Logout,Register,CreateSkillOffering,CreateSkillRequest,SearchSkills,SendMessage,ScheduleExchange,RateUser,ManageUsers,ModerateContent,ValidateUser,UpdateProfile,MatchSkills,StoreData,RetrieveData usecase
+    class Database database
