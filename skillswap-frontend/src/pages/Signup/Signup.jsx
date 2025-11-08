@@ -107,8 +107,14 @@ const Signup = () => {
           setErrors({ form: 'Unexpected response from server' });
         }
       } catch (err) {
-        const msg = err?.response?.data || err.message || 'Registration failed';
-        setErrors({ form: String(msg) });
+        // If backend responds with 409 Conflict, show a friendly message for duplicate email
+        const status = err?.response?.status;
+        if (status === 409) {
+          setErrors({ form: 'That email is already registered.' });
+        } else {
+          const msg = err?.response?.data || err.message || 'Registration failed';
+          setErrors({ form: String(msg) });
+        }
       }
     })();
   };

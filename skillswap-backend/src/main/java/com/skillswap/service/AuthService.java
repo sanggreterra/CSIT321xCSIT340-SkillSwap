@@ -25,6 +25,11 @@ public class AuthService {
     }
 
     public void register(RegisterRequest req) {
+        // check for existing email to provide a clear error instead of a DB constraint violation
+        if (userRepository.findByEmail(req.getEmail()).isPresent()) {
+            throw new com.skillswap.exception.EmailAlreadyExistsException(req.getEmail());
+        }
+
         User u = new User();
         u.setName(req.getName());
         u.setEmail(req.getEmail());
