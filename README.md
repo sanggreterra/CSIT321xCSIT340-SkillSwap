@@ -17,21 +17,21 @@
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **React JS** - UI library for building interactive user interfaces (Primary Framework)
+- **React JS** - UI library for building interactive user interfaces
 - **React Router** - Client-side routing for navigation
 - **Axios** - HTTP client for API communication
 - **Tailwind CSS** - Utility-first CSS framework for styling
 - **React Icons** - Icon library for UI elements
 
 ### Backend
-- **Spring Boot** - Java-based framework for building REST APIs (Primary Framework)
+- **Spring Boot** - Java-based framework for building REST APIs
 - **Spring Data JPA** - ORM for database operations
 - **Spring Security** - Authentication and authorization
 - **JWT (JSON Web Tokens)** - Secure token-based authentication
 - **Maven** - Dependency management and project building
 
 ### Database
-- **MySQL** - Relational database for data persistence (Primary Framework)
+- **MySQL** - Relational database for data persistence
 - **Supabase** - PostgreSQL-based backend (future migration)
 
 ### Additional Tools
@@ -76,13 +76,17 @@ git clone https://github.com/yourusername/skillswap.git
 cd skillswap
 ```
 
+You should now see two main folders:
+- `skillswap-backend/` - Spring Boot API
+- `skillswap-frontend/` - React application
+
 ---
 
 ### Step 2: Backend Setup (Spring Boot)
 
 #### 2.1 Navigate to Backend Directory
 ```bash
-cd backend
+cd skillswap-backend
 ```
 
 #### 2.2 Configure Database Connection
@@ -96,7 +100,7 @@ spring.datasource.username=root
 spring.datasource.password=your_mysql_password
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 ```
@@ -113,30 +117,36 @@ CREATE DATABASE skillswap_db;
 
 #### 2.4 Build and Run Backend
 
+**Using Maven Wrapper (Recommended):**
 ```bash
-# Build the project
-mvn clean install
+# On Mac/Linux
+./mvnw clean install
+./mvnw spring-boot:run
 
-# Run the application
+# On Windows
+mvnw.cmd clean install
+mvnw.cmd spring-boot:run
+```
+
+**Or using Maven (if installed globally):**
+```bash
+mvn clean install
 mvn spring-boot:run
 ```
 
-You should see output ending with: `Started SkillSwapApplication in X seconds`
+You should see output ending with: `Started SkillSwapBackendApplication in X seconds`
 
-✅ **Backend is now running on:** `http://localhost:8080`
+✅ **Backend is now running on:** `http://localhost:8080/api`
 
 ---
 
 ### Step 3: Frontend Setup (React)
 
-#### 3.1 Navigate to Frontend Directory
+#### 3.1 Open New Terminal and Navigate to Frontend
 
 ```bash
-# Go back to root directory first (if still in backend)
-cd ..
-
-# Navigate to frontend
-cd frontend
+# From root directory
+cd skillswap-frontend
 ```
 
 #### 3.2 Install Dependencies
@@ -149,7 +159,7 @@ This will download all required packages (takes 2-5 minutes depending on interne
 
 #### 3.3 Configure API Endpoint
 
-1. Create a `.env` file in the `frontend` directory
+1. Create or verify the `.env` file in the `skillswap-frontend` directory
 2. Add the following:
 
 ```
@@ -171,19 +181,29 @@ Your browser will automatically open to: `http://localhost:3000`
 ### Step 4: Verify Everything is Working
 
 1. **Check Backend API:**
-   - Open: `http://localhost:8080/api/health`
-   - You should see a success response
+   - Open: `http://localhost:8080/api/health` (or any endpoint you've created)
+   - You should see a JSON response
 
-2. **Check Frontend:**
+2. **Check Swagger Documentation:**
+   - Open: `http://localhost:8080/api/swagger-ui.html`
+   - You should see interactive API documentation
+
+3. **Check Frontend:**
    - Navigate to: `http://localhost:3000`
    - You should see the SkillSwap landing page
-   - Try logging in or creating an account
+   - Try navigating to different pages (Login, Signup, Dashboard)
 
-3. **Test API Connection:**
+4. **Test API Connection:**
    - Open browser Developer Tools (F12)
    - Go to Network tab
-   - Perform any action on the frontend
-   - You should see successful API calls to `localhost:8080`
+   - Perform any action on the frontend (like login or registration)
+   - You should see successful API calls to `localhost:8080/api`
+
+5. **Verify Database:**
+   - Open MySQL Workbench
+   - Connect to `skillswap_db`
+   - Run `SHOW TABLES;`
+   - You should see all 12 tables from the ERD
 
 ---
 
@@ -191,29 +211,61 @@ Your browser will automatically open to: `http://localhost:3000`
 
 ```
 skillswap/
-├── backend/                          # Spring Boot Backend
-│   ├── src/main/java/com/skillswap/
-│   │   ├── controller/               # REST API endpoints
-│   │   ├── service/                  # Business logic
-│   │   ├── repository/               # Database access
-│   │   ├── model/                    # Entity classes
-│   │   └── config/                   # Configuration classes
-│   ├── src/main/resources/
-│   │   └── application.properties    # Database & server config
+├── skillswap-backend/                # Spring Boot Backend
+│   ├── .github/
+│   ├── .mvn/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/skillswap/
+│   │   │   │   ├── config/           # Configuration classes
+│   │   │   │   ├── controller/       # REST API endpoints
+│   │   │   │   ├── dto/              # Data Transfer Objects
+│   │   │   │   ├── exception/        # Exception handlers
+│   │   │   │   ├── model/            # Entity classes (12 entities)
+│   │   │   │   ├── repository/       # Database access
+│   │   │   │   ├── security/         # JWT & authentication
+│   │   │   │   ├── service/          # Business logic
+│   │   │   │   ├── util/             # Utility classes
+│   │   │   │   └── SkillSwapBackendApplication.java
+│   │   │   └── resources/
+│   │   │       └── application.properties
+│   │   └── test/                     # Test classes
+│   ├── target/
+│   ├── .gitattributes
+│   ├── .gitignore
+│   ├── HELP.md
+│   ├── mvnw
+│   ├── mvnw.cmd
 │   └── pom.xml                       # Maven dependencies
 │
-├── frontend/                         # React Frontend
+├── skillswap-frontend/               # React Frontend
+│   ├── node_modules/
+│   ├── public/
 │   ├── src/
 │   │   ├── components/               # Reusable UI components
+│   │   ├── hooks/                    # Custom React hooks
 │   │   ├── pages/                    # Page components
+│   │   │   ├── AllCourses/
+│   │   │   ├── CourseDetails/
+│   │   │   ├── Dashboard/
+│   │   │   ├── Login/
+│   │   │   ├── Logout/
+│   │   │   ├── Settings/
+│   │   │   └── Signup/
 │   │   ├── services/                 # API service calls
-│   │   ├── App.js                    # Main component
-│   │   └── index.js                  # Entry point
-│   ├── public/                       # Static files
+│   │   ├── App.css                   # Main styles
+│   │   ├── App.jsx                   # Main component
+│   │   ├── index.css                 # Global styles
+│   │   ├── index.js                  # Entry point
+│   │   ├── reportWebVitals.js
+│   │   └── skillswap_icon.png
+│   ├── .env                          # Environment variables
+│   ├── .gitignore
+│   ├── package-lock.json
 │   ├── package.json                  # Dependencies
-│   └── .env                          # Environment variables
+│   └── README.md
 │
-└── README.md                         # This file
+└── README.md                         # This file (Root documentation)
 ```
 
 ---
@@ -309,9 +361,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 👥 Team
 
-- **Project Lead:** Sang'gre Terra
+- **Project Lead/Lead Developer:** Sang'gre Terra
 - **Backend Developer:** Eron Asia
-- **Frontend Developer/Designer:** TBD (Looking for one)
+- **Frontend Developer/Designer:** Lee Anne
 
 ---
 
