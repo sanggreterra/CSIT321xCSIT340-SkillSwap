@@ -6,6 +6,7 @@ import com.skillswap.dto.response.LoginResponse;
 import com.skillswap.model.User;
 import com.skillswap.repository.UserRepository;
 import com.skillswap.security.JwtTokenProvider;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -14,24 +15,28 @@ import java.util.Optional;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     public void register(RegisterRequest req) {
         User u = new User();
         u.setName(req.getName());
         u.setEmail(req.getEmail());
-        // NOTE: store plain password for brevity; replace with encoder in production
-        u.setPassword(req.getPassword());
+        // store hashed password
+        u.setPassword(passwordEncoder.encode(req.getPassword()));
         userRepository.save(u);
     }
 
     public LoginResponse login(LoginRequest req) {
         Optional<User> opt = userRepository.findByEmail(req.getEmail());
-        if (opt.isPresent() && opt.get().getPassword().equals(req.getPassword())) {
-            String token = JwtTokenProvider.createToken(opt.get());
+        if (opt.isPresent() && passwordEncoder.matches(req.getPassword(), opt.get().getPassword())) {
+            String token = jwtTokenProvider.createToken(opt.get());
             return new LoginResponse(token, opt.get().getId());
         }
         throw new RuntimeException("Invalid credentials");

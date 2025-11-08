@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
 import { usePageMeta } from '../../hooks/usePageMeta';
+import { authService } from '../../services';
 
 const Login = () => {
   usePageMeta('Login');
@@ -61,9 +62,23 @@ const Login = () => {
       setErrors(newErrors);
       return;
     }
-
-    // Handle login logic here
-    console.log('Login data:', formData);
+    // Call backend login endpoint
+    (async () => {
+      try {
+        const res = await authService.login({ email: formData.email.trim(), password: formData.password });
+        const data = res.data || res;
+        if (data && data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userId', data.userId);
+          navigate('/dashboard');
+        } else {
+          setErrors({ form: 'Unexpected response from server' });
+        }
+      } catch (err) {
+        const msg = err?.response?.data || err.message || 'Login failed';
+        setErrors({ form: String(msg) });
+      }
+    })();
   };
 
   return (
@@ -133,6 +148,7 @@ const Login = () => {
               <button type="submit" className="login-button">
                 Sign In
               </button>
+              {errors.form && <div className="form-error">{errors.form}</div>}
             </form>
 
             <div className="signup-link">

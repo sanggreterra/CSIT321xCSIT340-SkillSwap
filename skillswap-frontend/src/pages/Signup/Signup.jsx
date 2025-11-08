@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './Signup.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
 import { usePageMeta } from '../../hooks/usePageMeta';
+import { authService } from '../../services';
 
 const Signup = () => {
   usePageMeta('Signup');
@@ -85,9 +86,31 @@ const Signup = () => {
       setErrors(newErrors);
       return;
     }
+    // Prepare payload for backend
+    const payload = {
+      name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+      email: formData.email.trim(),
+      password: formData.password,
+    };
 
-    // Handle signup logic here
-    console.log('Signup data:', formData);
+    // Call backend register endpoint and navigate to dashboard on success
+    (async () => {
+      try {
+        const res = await authService.register(payload);
+        const data = res.data || res;
+        // expected { token, userId }
+        if (data && data.token) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('userId', data.userId);
+          navigate('/dashboard');
+        } else {
+          setErrors({ form: 'Unexpected response from server' });
+        }
+      } catch (err) {
+        const msg = err?.response?.data || err.message || 'Registration failed';
+        setErrors({ form: String(msg) });
+      }
+    })();
   };
 
   return (
@@ -216,6 +239,7 @@ const Signup = () => {
               <button type="submit" className="signup-button">
                 Create Account
               </button>
+              {errors.form && <div className="form-error">{errors.form}</div>}
             </form>
 
             <div className="login-link">
