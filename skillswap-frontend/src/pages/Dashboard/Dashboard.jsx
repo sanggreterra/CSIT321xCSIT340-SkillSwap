@@ -1,4 +1,5 @@
 import React from "react";
+import { FaFire, FaSignInAlt, FaLayerGroup, FaClock } from "react-icons/fa";
 import Header from "../../components/HomePage/Header";
 import "./Dashboard.css";
 
@@ -14,7 +15,9 @@ const Dashboard = () => {
 
         <div className="dashboard-stats">
           <div className="stat-card">
-            <div className="stat-icon orange"></div>
+            <div className="stat-icon orange">
+              <FaFire />
+            </div>
             <div className="stat-content">
               <div className="stat-header">
                 <span>Skill Streak</span>
@@ -26,7 +29,9 @@ const Dashboard = () => {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon green"></div>
+            <div className="stat-icon green">
+              <FaSignInAlt />
+            </div>
             <div className="stat-content">
               <div className="stat-header">
                 <span>Login Streak</span>
@@ -38,7 +43,9 @@ const Dashboard = () => {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon coral"></div>
+            <div className="stat-icon coral">
+              <FaLayerGroup />
+            </div>
             <div className="stat-content">
               <div className="stat-header">
                 <span>Total Skills</span>
@@ -49,7 +56,9 @@ const Dashboard = () => {
           </div>
 
           <div className="stat-card">
-            <div className="stat-icon mint"></div>
+            <div className="stat-icon mint">
+              <FaClock />
+            </div>
             <div className="stat-content">
               <div className="stat-header">
                 <span>Hours Spent</span>
@@ -86,6 +95,7 @@ const Dashboard = () => {
 
           <div className="recent-achievements">
             <h4>Recent Achievements</h4>
+
             <div className="achievement">
               <div className="ach-icon orange"></div>
               <div className="ach-details">
@@ -155,7 +165,9 @@ const Dashboard = () => {
               <h5>JavaScript</h5>
               <div className="skill-meta">
                 <span>25h spent · 12 sessions</span>
-                <span className="percent">92% <span className="gain">+15%</span></span>
+                <span className="percent">
+                  92% <span className="gain">+15%</span>
+                </span>
               </div>
             </div>
 
@@ -163,7 +175,9 @@ const Dashboard = () => {
               <h5>React</h5>
               <div className="skill-meta">
                 <span>20h spent · 8 sessions</span>
-                <span className="percent">88% <span className="gain">+10%</span></span>
+                <span className="percent">
+                  88% <span className="gain">+10%</span>
+                </span>
               </div>
             </div>
 
@@ -171,7 +185,9 @@ const Dashboard = () => {
               <h5>Spanish</h5>
               <div className="skill-meta">
                 <span>18h spent · 15 sessions</span>
-                <span className="percent">85% <span className="gain">+12%</span></span>
+                <span className="percent">
+                  85% <span className="gain">+12%</span>
+                </span>
               </div>
             </div>
           </div>
