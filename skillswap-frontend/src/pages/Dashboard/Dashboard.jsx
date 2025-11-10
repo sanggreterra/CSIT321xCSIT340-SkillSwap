@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFire, FaSignInAlt, FaLayerGroup, FaClock } from "react-icons/fa";
+import { HiOutlineFire, HiOutlineSun, HiOutlineBookOpen } from "react-icons/hi2";
 import Header from "../../components/HomePage/Header";
 import "./Dashboard.css";
 
@@ -15,114 +16,122 @@ const Dashboard = () => {
 
         <div className="dashboard-stats">
           <div className="stat-card">
-            <div className="stat-icon orange">
-              <FaFire />
-            </div>
-            <div className="stat-content">
-              <div className="stat-header">
-                <span>Skill Streak</span>
-                <span className="status active">Active</span>
-              </div>
-              <h3>12 days</h3>
-              <p>Longest: 28 days</p>
-            </div>
-          </div>
+			<div className="stat-icon orange">
+				<FaFire />
+			</div>
+			<span className="status active">Active</span>
+			<div className="stat-header">
+				<span>Skill Streak</span>
+			</div>
+			<h3>12 days</h3>
+			<p>Longest: 28 days</p>
+		   </div>
 
           <div className="stat-card">
             <div className="stat-icon green">
               <FaSignInAlt />
             </div>
-            <div className="stat-content">
-              <div className="stat-header">
-                <span>Login Streak</span>
-                <span className="status gain">+2</span>
-              </div>
-              <h3>8 days</h3>
-              <p>Longest: 15 days</p>
+            <span className="status gain">+2</span>
+            <div className="stat-header">
+              <span>Login Streak</span>
             </div>
+            <h3>8 days</h3>
+            <p>Longest: 15 days</p>
           </div>
 
           <div className="stat-card">
             <div className="stat-icon coral">
               <FaLayerGroup />
             </div>
-            <div className="stat-content">
-              <div className="stat-header">
-                <span>Total Skills</span>
-                <span className="status gain">+12%</span>
-              </div>
-              <h3>24</h3>
+			<span className="status gain">+12%</span>
+            <div className="stat-header">
+              <span>Total Skills</span>              
             </div>
+            <h3>24</h3>
           </div>
 
           <div className="stat-card">
             <div className="stat-icon mint">
               <FaClock />
             </div>
-            <div className="stat-content">
-              <div className="stat-header">
-                <span>Hours Spent</span>
-                <span className="status gain">+5%</span>
-              </div>
-              <h3>89</h3>
+            <span className="status gain">+5%</span>
+            <div className="stat-header">
+              <span>Hours Spent</span>
+              <span className="status gain">+5%</span>
             </div>
+            <h3>89</h3>
           </div>
         </div>
 
         <div className="dashboard-mid">
-          <div className="daily-activity">
-            <div className="section-header">
-              <h4>Daily Activity</h4>
-              <span className="small-text">Last 7 Days</span>
-            </div>
-            <div className="activity-graph">
-              {["2", "1", "3", "0", "2", "1", "4"].map((num, idx) => (
-                <div
-                  className={`activity-box ${num !== "0" ? "active" : ""}`}
-                  key={idx}
-                >
-                  <h5>{num}</h5>
-                  <p>skills</p>
-                </div>
-              ))}
-            </div>
-            <div className="activity-days">
-              {["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"].map((day) => (
-                <span key={day}>{day}</span>
-              ))}
-            </div>
-          </div>
+		<div className="daily-activity">
+  <div className="section-header">
+    <h4>Daily Activity</h4>
+    <span className="small-text">Last 7 Days</span>
+  </div>
 
-          <div className="recent-achievements">
-            <h4>Recent Achievements</h4>
+  <div className="activity-graph">
+    {[
+      { day: "Fri", num: "2" },
+      { day: "Sat", num: "1" },
+      { day: "Sun", num: "3" },
+      { day: "Mon", num: "0" },
+      { day: "Tue", num: "2" },
+      { day: "Wed", num: "1" },
+      { day: "Thu", num: "4" },
+    ].map(({ day, num }, idx) => (
+      <div className="activity-item" key={idx}>
+        <div className={`activity-box ${num !== "0" ? "active" : ""}`}>
+          <h5>{num}</h5>
+          <p>skills</p>
+        </div>
+        <span className="activity-day">{day}</span>
+      </div>
+    ))}
+  </div>
+</div>
 
-            <div className="achievement">
-              <div className="ach-icon orange"></div>
-              <div className="ach-details">
-                <h5>Skill Streak Master</h5>
-                <p>Maintained a 10-day learning streak</p>
-                <span className="tag rare">rare</span>
-              </div>
-            </div>
 
-            <div className="achievement">
-              <div className="ach-icon gray"></div>
-              <div className="ach-details">
-                <h5>Early Bird</h5>
-                <p>Logged in for 7 consecutive days</p>
-                <span className="tag common">common</span>
-              </div>
-            </div>
 
-            <div className="achievement">
-              <div className="ach-icon green"></div>
-              <div className="ach-details">
-                <h5>Knowledge Seeker</h5>
-                <p>Completed 5 different skill categories</p>
-                <span className="tag uncommon">uncommon</span>
-              </div>
-            </div>
-          </div>
+
+         <div className="recent-achievements">
+  <div className="section-header">
+    <h4>Recent Achievements</h4>
+  </div>
+
+  <div className="achievement">
+    <div className="ach-icon orange">
+      <HiOutlineFire />
+    </div>
+    <div className="ach-details">
+      <h5>Skill Streak Master</h5>
+      <p>Maintained a 10-day learning streak</p>
+      <span className="tag rare">rare</span>
+    </div>
+  </div>
+
+  <div className="achievement">
+    <div className="ach-icon gray">
+      <HiOutlineSun />
+    </div>
+    <div className="ach-details">
+      <h5>Early Bird</h5>
+      <p>Logged in for 7 consecutive days</p>
+      <span className="tag common">common</span>
+    </div>
+  </div>
+
+  <div className="achievement">
+    <div className="ach-icon green">
+      <HiOutlineBookOpen />
+    </div>
+    <div className="ach-details">
+      <h5>Knowledge Seeker</h5>
+      <p>Completed 5 different skill categories</p>
+      <span className="tag uncommon">uncommon</span>
+    </div>
+  </div>
+</div>
         </div>
 
         <div className="dashboard-bottom">
