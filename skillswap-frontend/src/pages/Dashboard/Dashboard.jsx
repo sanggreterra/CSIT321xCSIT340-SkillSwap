@@ -136,33 +136,40 @@ const Dashboard = () => {
 
         <div className="dashboard-bottom">
           <div className="learning-goals">
-            <div className="section-header">
-              <h4>Learning Goals</h4>
-              <a href="#">View All</a>
-            </div>
+  <div className="section-header">
+    <h4>Learning Goals</h4>
+    <a href="#">View All</a>
+  </div>
 
-            <div className="goal">
-              <h5>Complete React Mastery Course</h5>
-              <div className="progress-bar">
-                <div className="progress-fill" style={{ width: "75%" }}></div>
-              </div>
-              <div className="goal-meta">
-                <span>75 / 100</span>
-                <span>Due: 4/15/2024</span>
-              </div>
-            </div>
+  <div className="goal">
+    <div className="goal-header">
+      <h5>Complete React Mastery Course</h5>
+      <span className="goal-percent">75%</span>
+    </div>
+    <div className="progress-bar">
+      <div className="progress-fill" style={{ width: "75%" }}></div>
+    </div>
+    <div className="goal-meta">
+      <span>75 / 100</span>
+      <span>Due: 4/15/2024</span>
+    </div>
+  </div>
 
-            <div className="goal">
-              <h5>Practice Spanish 30 minutes daily</h5>
-              <div className="progress-bar">
-                <div className="progress-fill" style={{ width: "73%" }}></div>
-              </div>
-              <div className="goal-meta">
-                <span>22 / 30</span>
-                <span>Due: 3/31/2024</span>
-              </div>
-            </div>
-          </div>
+  <div className="goal">
+    <div className="goal-header">
+      <h5>Practice Spanish 30 minutes daily</h5>
+      <span className="goal-percent">73%</span>
+    </div>
+    <div className="progress-bar">
+      <div className="progress-fill" style={{ width: "73%" }}></div>
+    </div>
+    <div className="goal-meta">
+      <span>22 / 30</span>
+      <span>Due: 3/31/2024</span>
+    </div>
+  </div>
+</div>
+
 
           <div className="skill-performance">
             <div className="section-header">
@@ -171,35 +178,44 @@ const Dashboard = () => {
             </div>
 
             <div className="skill-item">
-              <h5>JavaScript</h5>
-              <div className="skill-meta">
-                <span>25h spent · 12 sessions</span>
-                <span className="percent">
-                  92% <span className="gain">+15%</span>
-                </span>
-              </div>
-            </div>
+  <div className="skill-header">
+    <h5>JavaScript</h5>
+    <span className="primary-percent">92%</span>
+  </div>
+  <div className="skill-meta">
+    <span>25h spent · 12 sessions</span>
+    <span className="gain">+15%</span>
+  </div>
+</div>
 
-            <div className="skill-item">
-              <h5>React</h5>
-              <div className="skill-meta">
-                <span>20h spent · 8 sessions</span>
-                <span className="percent">
-                  88% <span className="gain">+10%</span>
-                </span>
-              </div>
-            </div>
+<div className="skill-item">
+  <div className="skill-header">
+    <h5>React</h5>
+    <span className="primary-percent">88%</span>
+  </div>
+  <div className="skill-meta">
+    <span>20h spent · 8 sessions</span>
+    <span className="gain">+10%</span>
+  </div>
+</div>
 
-            <div className="skill-item">
-              <h5>Spanish</h5>
-              <div className="skill-meta">
-                <span>18h spent · 15 sessions</span>
-                <span className="percent">
-                  85% <span className="gain">+12%</span>
-                </span>
-              </div>
-            </div>
+<div className="skill-item">
+  <div className="skill-header">
+    <h5>Spanish</h5>
+    <span className="primary-percent">85%</span>
+  </div>
+  <div className="skill-meta">
+    <span>18h spent · 15 sessions</span>
+    <span className="gain">+12%</span>
+  </div>
+</div>
+
           </div>
+<footer className="dashboard-footer sticky">
+  <p>© 2025 SkillSwap. All rights reserved.</p>
+</footer>
+
+
         </div>
       </div>
     </>

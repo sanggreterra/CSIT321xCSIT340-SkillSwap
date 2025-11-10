@@ -29,7 +29,7 @@
 .stat-card {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   padding: 20px 24px;
   text-align: left;
   display: flex;
@@ -111,7 +111,7 @@
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .section-header {
@@ -256,6 +256,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
 .learning-goals,
@@ -263,7 +264,7 @@
   background: #fff;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .learning-goals a,
@@ -278,10 +279,23 @@
   margin-bottom: 1.2rem;
 }
 
-.goal h5 {
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.goal-header h5 {
   font-weight: 600;
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  color: #212b36;
+}
+
+.goal-percent {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280;
 }
 
 .progress-bar {
@@ -313,30 +327,59 @@
   margin-bottom: 1.2rem;
 }
 
-.skill-item h5 {
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill-header h5 {
   font-weight: 600;
   font-size: 0.9rem;
   color: #212b36;
 }
 
+.primary-percent {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
 .skill-meta {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* gain aligned to right */
   align-items: center;
   color: #6b7280;
   font-size: 0.85rem;
 }
 
-.skill-meta .percent {
-  color: #111827;
+.gain {
   font-weight: 600;
+  color: #22c55e;
 }
 
-.skill-meta .gain {
-  color: #22c55e;
-  font-weight: 600;
-  margin-left: 4px;
+.dashboard-footer {
+  width: 100%;
+  padding: 2rem 0 1rem 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  position: relative;
 }
+
+@media (min-height: 0px) {
+  body, html {
+    min-height: 100%;
+    position: relative;
+  }
+}
+
+.dashboard-footer.sticky {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
 
 /* === RESPONSIVE === */
 
