@@ -66,6 +66,7 @@ const Login = () => {
     (async () => {
       try {
         const res = await authService.login({ email: formData.email.trim(), password: formData.password });
+        console.debug('Login response:', res);
         const data = res.data || res;
         if (data && data.token) {
           localStorage.setItem('token', data.token);

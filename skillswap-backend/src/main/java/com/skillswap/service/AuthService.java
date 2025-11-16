@@ -38,12 +38,38 @@ public class AuthService {
         userRepository.save(u);
     }
 
+    /**
+     * Register a new user and return a LoginResponse with JWT token and userId.
+     * Performs simple validation and duplicate-email check.
+     */
+    public LoginResponse registerAndLogin(RegisterRequest req) {
+        if (req.getEmail() == null || req.getEmail().trim().isEmpty() || !req.getEmail().contains("@")) {
+            throw new IllegalArgumentException("Invalid email");
+        }
+        if (req.getPassword() == null || req.getPassword().length() < 8) {
+            throw new IllegalArgumentException("Password must be at least 8 characters");
+        }
+
+        if (userRepository.findByEmail(req.getEmail()).isPresent()) {
+            throw new com.skillswap.exception.EmailAlreadyExistsException(req.getEmail());
+        }
+
+        User u = new User();
+        u.setName(req.getName());
+        u.setEmail(req.getEmail());
+        u.setPassword(passwordEncoder.encode(req.getPassword()));
+        User saved = userRepository.save(u);
+
+        String token = jwtTokenProvider.createToken(saved);
+        return new LoginResponse(token, saved.getId());
+    }
+
     public LoginResponse login(LoginRequest req) {
         Optional<User> opt = userRepository.findByEmail(req.getEmail());
         if (opt.isPresent() && passwordEncoder.matches(req.getPassword(), opt.get().getPassword())) {
             String token = jwtTokenProvider.createToken(opt.get());
             return new LoginResponse(token, opt.get().getId());
         }
-        throw new RuntimeException("Invalid credentials");
+        throw new com.skillswap.exception.InvalidCredentialsException();
     }
 }

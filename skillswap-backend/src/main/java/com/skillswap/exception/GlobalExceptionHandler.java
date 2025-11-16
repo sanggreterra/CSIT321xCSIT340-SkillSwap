@@ -28,4 +28,14 @@ public class GlobalExceptionHandler {
         // Generic catch for DB constraint violations (unique/index). Return 409 Conflict.
         return ResponseEntity.status(HttpStatus.CONFLICT).body("Database constraint violation: " + ex.getMostSpecificCause().getMessage());
     }
+
+    @ExceptionHandler(com.skillswap.exception.InvalidCredentialsException.class)
+    public ResponseEntity<String> handleInvalidCredentials(com.skillswap.exception.InvalidCredentialsException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleBadRequest(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }

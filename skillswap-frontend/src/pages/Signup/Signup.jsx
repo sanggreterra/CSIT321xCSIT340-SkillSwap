@@ -97,6 +97,7 @@ const Signup = () => {
     (async () => {
       try {
         const res = await authService.register(payload);
+        console.debug('Signup response:', res);
         const data = res.data || res;
         // expected { token, userId }
         if (data && data.token) {
