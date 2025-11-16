@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaFire, FaSignInAlt, FaLayerGroup, FaClock } from "react-icons/fa";
 import { HiOutlineFire, HiOutlineSun, HiOutlineBookOpen } from "react-icons/hi2";
 import Header from "../../components/HomePage/Header";
+import { userService } from '../../services';
+import { useNavigate } from 'react-router-dom';
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+    (async () => {
+      try {
+        const res = await userService.getProfile(userId);
+        const data = res.data || res;
+        setName(data.name || '');
+      } catch (err) {
+        console.error('Failed to load profile', err);
+      }
+    })();
+  }, []);
+
+
   return (
     <>
       <Header />
       <div className="dashboard-container">
-        <h2 className="dashboard-title">Welcome back, John!</h2>
+        <h2 className="dashboard-title">Welcome back, {name || 'there'}!</h2>
         <p className="dashboard-subtitle">
           Here's your learning progress and achievements
         </p>

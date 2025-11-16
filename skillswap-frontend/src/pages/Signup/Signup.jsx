@@ -18,6 +18,7 @@ const Signup = () => {
     subscribeNewsletter: false
   });
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateEmail = (email) => {
     return email.includes('@') && email.length > 0;
@@ -86,15 +87,17 @@ const Signup = () => {
       setErrors(newErrors);
       return;
     }
-    // Prepare payload for backend
+    // Prepare payload for backend (include agreeToTerms so server can validate)
     const payload = {
       name: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
       email: formData.email.trim(),
       password: formData.password,
+      agreeToTerms: !!formData.agreeToTerms,
     };
 
     // Call backend register endpoint and navigate to dashboard on success
     (async () => {
+      setIsSubmitting(true);
       try {
         const res = await authService.register(payload);
         console.debug('Signup response:', res);
@@ -111,11 +114,22 @@ const Signup = () => {
         // If backend responds with 409 Conflict, show a friendly message for duplicate email
         const status = err?.response?.status;
         if (status === 409) {
-          setErrors({ form: 'That email is already registered.' });
+          // Prefer showing the message next to the email field and as a banner
+          setErrors({ email: 'User already exists using this credential', form: 'User already exists using this credential' });
+        } else if (status === 400) {
+          const msg = String(err?.response?.data || err.message || 'Registration failed');
+          // If validation message mentions agreeToTerms, map it to the checkbox field
+          if (msg.toLowerCase().includes('agreetoterms') || msg.toLowerCase().includes('agree')) {
+            setErrors({ agreeToTerms: 'You must agree to the Terms of Service and Privacy Policy', form: 'You must agree to the Terms of Service and Privacy Policy' });
+          } else {
+            setErrors({ form: msg });
+          }
         } else {
           const msg = err?.response?.data || err.message || 'Registration failed';
           setErrors({ form: String(msg) });
         }
+      } finally {
+        setIsSubmitting(false);
       }
     })();
   };
@@ -226,6 +240,7 @@ const Signup = () => {
                   <label htmlFor="agreeToTerms" className="checkbox-label">
                     I agree to the <a href="#" className="link">Terms of Service</a> and <a href="#" className="link">Privacy Policy</a> *
                   </label>
+                  {errors.agreeToTerms && <span className="error-message">{errors.agreeToTerms}</span>}
                 </div>
 
                 <div className="checkbox-group">
@@ -243,8 +258,15 @@ const Signup = () => {
                 </div>
               </div>
 
-              <button type="submit" className="signup-button">
-                Create Account
+              {/* In-site banner for form-level errors (e.g., duplicate account) */}
+              {errors.form && (
+                <div style={{ background: '#ffe6e6', color: '#990000', padding: '10px', borderRadius: 6, marginBottom: 12 }}>
+                  {errors.form}
+                </div>
+              )}
+
+              <button type="submit" className="signup-button" disabled={isSubmitting}>
+                {isSubmitting ? 'Creating account...' : 'Create Account'}
               </button>
               {errors.form && <div className="form-error">{errors.form}</div>}
             </form>

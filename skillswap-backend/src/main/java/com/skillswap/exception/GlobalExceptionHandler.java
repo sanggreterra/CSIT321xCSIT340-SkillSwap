@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.validation.FieldError;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -37,5 +39,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleBadRequest(IllegalArgumentException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        StringBuilder sb = new StringBuilder();
+        for (FieldError err : ex.getBindingResult().getFieldErrors()) {
+            sb.append(err.getField()).append(": ").append(err.getDefaultMessage()).append("; ");
+        }
+        String message = sb.toString().trim();
+        if (message.endsWith(";")) message = message.substring(0, message.length()-1);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
     }
 }
