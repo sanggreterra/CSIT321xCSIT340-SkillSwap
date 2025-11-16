@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import SkillSwapLogo from '../../skillswap_icon.png'
 
 const Header = () => {
   const navigate = useNavigate();
   const [signedIn, setSignedIn] = useState(false);
+
+  const location = useLocation();
+  const pathname = location.pathname || '';
+  const isAuthPage = pathname === '/signup' || pathname === '/login';
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -15,8 +19,19 @@ const Header = () => {
       if (e.key === 'token') setSignedIn(!!e.newValue);
     };
     window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
-  }, []);
+
+    // toggle body class when on auth pages so pages can adjust padding
+    if (isAuthPage) {
+      document.body.classList.add('auth-header-fixed');
+    } else {
+      document.body.classList.remove('auth-header-fixed');
+    }
+
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      document.body.classList.remove('auth-header-fixed');
+    };
+  }, [isAuthPage]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -26,7 +41,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${isAuthPage ? 'fixed-header' : ''}`}>
       <div className="header-container">
         {/* Logo */}
         <div className="logo">

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css';
-import SkillSwapLogo from '../../skillswap_icon.png'
 import { usePageMeta } from '../../hooks/usePageMeta';
+import Header from '../../components/HomePage/Header';
 import { authService } from '../../services';
 
 const Signup = () => {
@@ -138,13 +138,7 @@ const Signup = () => {
     <div className="signup-container">
       <div className="signup-background">
         <div className="signup-content">
-          {/* Logo */}
-          <div className="logo-section">
-            <div className="logo-icon">
-            <img src={SkillSwapLogo} alt="SkillSwap Logo" width={40} height={40} />
-            </div>
-            <h1 className="logo-text">SKILLSWAP</h1>
-          </div>
+          <Header />
 
           {/* Welcome Text */}
           <div className="welcome-section">

@@ -26,6 +26,11 @@
   max-width: 672px;
 }
 
+/* When header is fixed on auth pages, push content down so it's not covered */
+body.auth-header-fixed .signup-content {
+  padding-top: 88px;
+}
+
 /* Logo Section */
 .logo-section {
   display: flex;
