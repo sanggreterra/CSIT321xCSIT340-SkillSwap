@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import SkillSwapLogo from '../../skillswap_icon.png'
+import Header from '../../components/HomePage/Header';
 import { usePageMeta } from '../../hooks/usePageMeta';
 import { authService } from '../../services';
 
@@ -66,6 +66,7 @@ const Login = () => {
     (async () => {
       try {
         const res = await authService.login({ email: formData.email.trim(), password: formData.password });
+        console.debug('Login response:', res);
         const data = res.data || res;
         if (data && data.token) {
           localStorage.setItem('token', data.token);
@@ -85,13 +86,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-background">
         <div className="login-content">
-          {/* Logo */}
-          <div className="logo-section">
-            <div className="logo-icon">
-            <img src={SkillSwapLogo} alt="SkillSwap Logo" width={40} height={40} />
-            </div>
-            <h1 className="logo-text">SKILLSWAP</h1>
-          </div>
+          <Header />
 
           {/* Welcome Text */}
           <div className="welcome-section">

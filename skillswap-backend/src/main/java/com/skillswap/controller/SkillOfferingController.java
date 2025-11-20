@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/skill-offerings")
+@RequestMapping("/offerings")
 public class SkillOfferingController {
 
     private final SkillOfferingService service;
@@ -19,6 +19,6 @@ public class SkillOfferingController {
     @PostMapping
     public ResponseEntity<SkillOffering> createOffering(@RequestBody SkillOfferingRequest req) {
         SkillOffering created = service.createOffering(req);
-        return ResponseEntity.ok(created);
+        return ResponseEntity.status(201).body(created);
     }
 }

@@ -22,6 +22,12 @@ public class SkillController {
         return ResponseEntity.ok(skillService.getAllSkills());
     }
 
+    @PostMapping
+    public ResponseEntity<Skill> createSkill(@RequestBody Skill skill) {
+        Skill s = skillService.createSkill(skill);
+        return ResponseEntity.status(201).body(s);
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<Skill>> searchSkills(@RequestParam("q") String q) {
         return ResponseEntity.ok(skillService.searchSkills(q));

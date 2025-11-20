@@ -20,7 +20,6 @@
 - **React JS** - UI library for building interactive user interfaces
 - **React Router** - Client-side routing for navigation
 - **Axios** - HTTP client for API communication
-- **Tailwind CSS** - Utility-first CSS framework for styling
 - **React Icons** - Icon library for UI elements
 
 ### Backend
@@ -72,8 +71,8 @@ Before you begin, make sure you have the following installed on your computer:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/skillswap.git
-cd skillswap
+git clone https://github.com/sanggreterra/CSIT321xCSIT340-SkillSwap.git
+cd CSIT321xCSIT340-SkillSwap
 ```
 
 You should now see two main folders:

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/skill-requests")
+@RequestMapping("/requests")
 public class SkillRequestController {
 
     private final SkillRequestService service;
@@ -28,7 +28,8 @@ public class SkillRequestController {
         com.skillswap.model.Skill s = new com.skillswap.model.Skill();
         s.setId(req.getSkillId());
         r.setSkill(s);
+        // preferredTimes are optional; stored in details or a dedicated field later
         SkillRequest created = service.createRequest(r);
-        return ResponseEntity.ok(created);
+        return ResponseEntity.status(201).body(created);
     }
 }

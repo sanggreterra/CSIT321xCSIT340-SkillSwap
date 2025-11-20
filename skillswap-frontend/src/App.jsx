@@ -17,6 +17,7 @@ import CourseDetails from "./pages/CourseDetails/CourseDetails";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Settings from "./pages/Settings/Settings";
 import Logout from "./pages/Logout/Logout";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 import { usePageMeta } from "./hooks/usePageMeta";
 
@@ -46,8 +47,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>

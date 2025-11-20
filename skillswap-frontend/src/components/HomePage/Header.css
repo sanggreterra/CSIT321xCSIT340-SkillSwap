@@ -7,6 +7,16 @@
   z-index: 1000;
 }
 
+/* When used on auth pages, make the header fixed to the viewport */
+.fixed-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1100;
+}
+
 .header-container {
   display: flex;
   align-items: center;

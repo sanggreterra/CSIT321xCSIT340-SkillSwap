@@ -1,0 +1,139 @@
+sequenceDiagram
+    participant User
+    participant Registration Form
+    participant Validation Controller
+    participant Database
+    participant Email Service
+    participant Social Service
+    participant Authentication Service
+    participant Profile Service
+    participant Notification Service
+
+    Note over User,Notification Service: SkillSwap User Registration Flow
+
+    %% Initial Registration Form Load
+    User->>Registration Form: Access registration page
+    Registration Form->>Validation Controller: Load registration form
+    Validation Controller-->>Registration Form: Return form with validation rules
+    Registration Form-->>User: Display registration form
+
+    %% Email Validation
+    User->>Registration Form: Enter email address
+    Registration Form->>Validation Controller: Validate email format
+    Validation Controller->>Database: Check if email exists
+    Database-->>Validation Controller: Return email status
+    Validation Controller-->>Registration Form: Return validation result
+    Registration Form-->>User: Show validation feedback
+
+    %% Password Entry and Validation
+    User->>Registration Form: Enter password
+    Registration Form->>Validation Controller: Validate password strength
+    Validation Controller-->>Registration Form: Password validation
+    Registration Form-->>User: Show strength indicator
+
+    %% Password Confirmation
+    User->>Registration Form: Confirm password
+    Registration Form->>Validation Controller: Validate match
+    Validation Controller-->>Registration Form: Match validation
+    Registration Form-->>User: Show confirmation
+
+    %% Registration Submission
+    User->>Registration Form: Submit registration form
+    Registration Form->>Validation Controller: Process registration data
+    Validation Controller->>Database: Verify email uniqueness
+    Database-->>Validation Controller: Email available
+    Validation Controller->>Authentication Service: Hash password
+    Authentication Service-->>Validation Controller: Hashed password
+    Note over Database: Insert new user with is_active=false
+    Validation Controller->>Database: Create user record
+    Database-->>Validation Controller: Return user_id
+
+    %% Token Generation and Storage
+    Validation Controller->>Authentication Service: Generate verification token
+    Authentication Service->>Database: Store token
+    Database-->>Authentication Service: Token stored
+    Authentication Service-->>Validation Controller: Return token
+
+    %% Email and Profile Creation
+    Validation Controller->>Email Service: Send verification email
+    Email Service-->>Validation Controller: Email sent
+    Validation Controller->>Profile Service: Create basic profile
+    Profile Service->>Database: Insert profile data
+    Database-->>Profile Service: Profile created
+    Profile Service-->>Validation Controller: Profile confirmed
+    Validation Controller-->>Registration Form: Registration successful
+    Registration Form-->>User: Show verification message
+
+    Note over User,Notification Service: Email Verification Process
+
+    %% Email Verification
+    User->>Email Service: Click verification link
+    Email Service->>Validation Controller: Process token
+    Validation Controller->>Database: Validate token
+    Database-->>Validation Controller: Validation result
+
+    alt Token Valid
+        Validation Controller->>Database: Activate user
+        Database-->>Validation Controller: User activated
+        Validation Controller->>Authentication Service: Create login session
+        Authentication Service->>Database: Store session
+        Database-->>Authentication Service: Session stored
+        Authentication Service-->>Validation Controller: Session ready
+        Validation Controller->>Notification Service: Send welcome notification
+        Notification Service-->>Validation Controller: Notification sent
+        Validation Controller-->>Email Service: Redirect to onboarding
+        Email Service-->>User: Welcome to SkillSwap
+    else Invalid/Expired
+        Validation Controller-->>Email Service: Show error
+        Email Service-->>User: Invalid or expired token
+    end
+
+    Note over User,Profile Service: Social Media Registration
+
+    %% Social Media Registration Flow
+    User->>Registration Form: Click "Sign up with Google/Facebook"
+    Registration Form->>Social Service: Initiate OAuth flow
+    Social Service->>User: Redirect to provider
+    User->>Social Service: Authorize app
+    Social Service-->>Registration Form: Return user data + token
+    Registration Form->>Validation Controller: Process social registration
+    Validation Controller->>Database: Check if account exists
+    Database-->>Validation Controller: Status result
+
+    alt New Social Account
+        Validation Controller->>Database: Create social user
+        Database-->>Validation Controller: User created
+        Validation Controller->>Profile Service: Create profile
+        Profile Service->>Database: Insert data
+        Database-->>Profile Service: Profile created
+        Profile Service-->>Validation Controller: Confirmed
+        Validation Controller->>Authentication Service: Create session
+        Authentication Service-->>Validation Controller: Session created
+        Validation Controller->>Notification Service: Send welcome
+        Notification Service-->>Validation Controller: Sent
+        Validation Controller-->>Registration Form: Registration complete
+        Registration Form-->>User: Redirect to onboarding
+    else Existing Account
+        Validation Controller-->>Registration Form: Account exists
+        Registration Form-->>User: Redirect to login
+    end
+
+    Note over Validation Controller,User: Error Handling
+
+    alt Database Error
+        Database-->>Validation Controller: Connection timeout
+        Validation Controller-->>Registration Form: Database error
+        Registration Form-->>User: "Service temporarily unavailable"
+    else Validation Error
+        Validation Controller-->>Registration Form: Validation failed
+        Registration Form-->>User: Show field-specific errors
+    else Email Error
+        Email Service-->>Validation Controller: Email failed
+        Validation Controller-->>Registration Form: Retry email
+        Registration Form-->>User: "Account created, resend verification"
+    end
+
+    Note over Authentication Service,User: Session Management
+    Authentication Service->>Database: Create session
+    Database-->>Authentication Service: Session stored
+    Authentication Service-->>User: User logged in

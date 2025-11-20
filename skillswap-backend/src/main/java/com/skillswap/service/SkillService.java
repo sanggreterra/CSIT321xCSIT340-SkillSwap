@@ -22,4 +22,8 @@ public class SkillService {
     public List<Skill> searchSkills(String q) {
         return skillRepository.findByNameContainingIgnoreCase(q);
     }
+
+    public Skill createSkill(Skill skill) {
+        return skillRepository.save(skill);
+    }
 }
