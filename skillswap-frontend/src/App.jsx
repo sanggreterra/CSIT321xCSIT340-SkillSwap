@@ -1,3 +1,4 @@
+// App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/HomePage/Header";
@@ -24,7 +25,7 @@ import { usePageMeta } from "./hooks/usePageMeta";
 function App() {
   const HomePage = () => (
     <>
-      {usePageMeta('Home')}
+      {usePageMeta("Home")}
       <Header />
       <HeroSection />
       <CategoriesSection />
@@ -47,8 +48,22 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/courses" element={<AllCourses />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/logout" element={<Logout />} />
         </Routes>
       </div>
