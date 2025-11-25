@@ -1,28 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import "./Logout.css";
+import { userService } from "../../services";
 
-// Placeholder user objects; backend can replace with real API data
-const placeholderUser = {
-  name: "John Doe",
-  email: "john.doe@email.com",
-  avatarInitials: "JD"
-};
-
-const placeholderAccounts = [
-  { name: "Jane Smith", email: "jane.smith@email.com", avatarInitials: "JS" },
-  placeholderUser
-];
-
-function Logout({ user = placeholderUser, accounts = placeholderAccounts }) {
+function Logout() {
   usePageMeta("Logout");
   const navigate = useNavigate();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [accounts, setAccounts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const uid = localStorage.getItem("userId");
+    if (!uid) {
+      setLoading(false);
+      return;
+    }
+    userService
+      .getProfile(uid)
+      .then((res) => {
+        setUser(res.data || null);
+      })
+      .catch(() => {
+        setUser(null);
+      })
+      .finally(() => setLoading(false));
+    // Optionally load other accounts if you support account switching
+  }, []);
 
   const handleSignOut = () => {
+    // Clear local session data and state
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    setUser(null);
+    setAccounts([]);
     navigate("/login");
   };
 
@@ -52,19 +65,31 @@ function Logout({ user = placeholderUser, accounts = placeholderAccounts }) {
 
         {/* Dynamic User Box */}
         <div className="user-box-wrapper">
-          <div className="user-box">
-            <div className="avatar">{user.avatarInitials}</div>
-            <div className="user-info">
-              <h3>{user.name}</h3>
-              <p>{user.email}</p>
+          {loading ? (
+            <div className="user-box loading">Loading...</div>
+          ) : user ? (
+            <div className="user-box">
+              <div className="avatar">{(user.name && user.name[0]) || "?"}</div>
+              <div className="user-info">
+                <h3>{user.name}</h3>
+                <p>{user.email}</p>
+              </div>
+              <div className="arrow" onClick={toggleDropdown}>
+                <i className="fa-solid fa-chevron-down"></i>
+              </div>
             </div>
-            <div className="arrow" onClick={toggleDropdown}>
-              <i className="fa-solid fa-chevron-down"></i>
+          ) : (
+            <div className="user-box empty">
+              <div className="avatar">?</div>
+              <div className="user-info">
+                <h3>Not signed in</h3>
+                <p>No active account</p>
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Dropdown for switching accounts */}
-          {dropdownOpen && (
+          {/* Dropdown for switching accounts (only show if accounts exist) */}
+          {dropdownOpen && accounts.length > 0 && (
             <div className="user-dropdown">
               {accounts.map((acc, index) => (
                 <div
@@ -72,7 +97,7 @@ function Logout({ user = placeholderUser, accounts = placeholderAccounts }) {
                   className="dropdown-item"
                   onClick={() => handleSwitchAccount(acc)}
                 >
-                  <div className="avatar-small">{acc.avatarInitials}</div>
+                  <div className="avatar-small">{(acc.name && acc.name[0]) || "?"}</div>
                   <div className="user-info-small">
                     <p>{acc.name}</p>
                     <small>{acc.email}</small>

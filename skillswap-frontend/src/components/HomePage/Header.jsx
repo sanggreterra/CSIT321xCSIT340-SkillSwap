@@ -34,10 +34,9 @@ const Header = () => {
   }, [isAuthPage]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    setSignedIn(false);
-    navigate('/login');
+    // Navigate to the logout confirmation page so the user can choose how to sign out.
+    // Do not clear localStorage here so the Logout page can show the currently signed-in user.
+    navigate('/logout');
   };
 
   return (

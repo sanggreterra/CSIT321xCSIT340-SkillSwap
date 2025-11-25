@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# local Supabase profile (contains DB credentials)
+src/main/resources/application-supabase.properties
