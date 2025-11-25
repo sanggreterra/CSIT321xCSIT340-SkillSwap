@@ -1,4 +1,251 @@
-.page-container {
-  padding: 120px 312px;
+.logout-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  padding: 40px;
+}
+
+.logout-card {
+  width: 500px;
+  background: white;
+  box-shadow: 0px 12px 24px rgba(145, 158, 171, 0.12);
+  overflow: hidden;
   text-align: center;
+  font-family: "Public Sans", sans-serif;
+}
+
+/* Header */
+.logout-header {
+  background: linear-gradient(135deg, #ff6a2f, #ff7648);
+  color: white;
+  padding: 50px 24px 40px;
+}
+
+.logout-header .logout-icon {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.logout-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.logout-header p {
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+/* User box */
+.user-box-wrapper {
+  position: relative;
+}
+
+.user-box {
+  margin-top: 24px;
+  background: #f7f7f7;
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 14px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  text-align: left;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #d8f3dc;
+  color: #0b6d42;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.user-info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.user-info p {
+  font-size: 14px;
+  color: #637381;
+  margin: 0;
+}
+
+.arrow {
+  margin-left: auto;
+  font-size: 18px;
+  color: #637381;
+}
+
+/* Dropdown */
+.user-dropdown {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.15);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background: #f4f6f8;
+}
+
+.avatar-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #d8f3dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-info-small {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  gap: 0;
+}
+
+.user-info-small p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.user-info-small small {
+  font-size: 12px;
+  color: #637381;
+  margin: 0;
+}
+
+.add-account {
+  font-weight: 600;
+  color: #00ab55;
+  justify-content: center;
+}
+
+/* Buttons */
+.btn-logout {
+  width: 85%;
+  margin: 22px auto 10px;
+  padding: 14px 0;
+  border: none;
+  border-radius: 12px;
+  background: #ff6a2f;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-logout:hover {
+  background: #ff5a1c;
+  box-shadow: 0 0 12px 2px rgba(255, 106, 47, 0.6);
+}
+
+.btn-stay {
+  width: 85%;
+  margin: 0 auto 20px;
+  padding: 14px 0;
+  border: none;
+  border-radius: 12px;
+  background: #f4f6f8;
+  color: #637381;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-stay:hover {
+  background: #e8ebee;
+}
+
+hr {
+  margin: 24px auto;
+  width: 85%;
+  border: none;
+  border-top: 1px solid #ececec;
+}
+
+/* Quick Actions */
+.quick-actions-section {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.quick-actions-title {
+  font-weight: 600;
+  margin-bottom: 24px;
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 16px;
+}
+
+.quick-actions div {
+  text-align: center;
+  cursor: pointer;
+}
+
+
+/* Footer Security */
+.footer-security {
+  padding: 24px;
+  margin-bottom: 24px;
+  color: #637381;
+}
+
+.footer-security p {
+  font-size: 14px;
+}
+
+.footer-security small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.8;
 }

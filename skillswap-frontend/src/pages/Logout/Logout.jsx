@@ -1,23 +1,129 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { usePageMeta } from '../../hooks/usePageMeta';
-import './Logout.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { usePageMeta } from "../../hooks/usePageMeta";
+import "./Logout.css";
 
-function Logout() {
-  usePageMeta('Logout');
+// Placeholder user objects; backend can replace with real API data
+const placeholderUser = {
+  name: "John Doe",
+  email: "john.doe@email.com",
+  avatarInitials: "JD"
+};
+
+const placeholderAccounts = [
+  { name: "Jane Smith", email: "jane.smith@email.com", avatarInitials: "JS" },
+  placeholderUser
+];
+
+function Logout({ user = placeholderUser, accounts = placeholderAccounts }) {
+  usePageMeta("Logout");
   const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    // Clear auth state and redirect to login
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    navigate('/login');
-  }, [navigate]);
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/login");
+  };
+
+  const handleStaySignedIn = () => {
+    navigate("/dashboard");
+  };
+
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const handleSwitchAccount = (account) => {
+    console.log("Switch to account:", account); // backend handles real switch
+    setDropdownOpen(false);
+  };
 
   return (
-    <div className="page-container">
-      <h1>Logging out...</h1>
-      <p>You will be redirected to the sign in page.</p>
+    <div className="logout-wrapper">
+      <div className="logout-card">
+
+        {/* Header */}
+        <div className="logout-header">
+          <div className="logout-icon">
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+          </div>
+          <h1>Sign Out</h1>
+          <p>Choose how you'd like to proceed</p>
+        </div>
+
+        {/* Dynamic User Box */}
+        <div className="user-box-wrapper">
+          <div className="user-box">
+            <div className="avatar">{user.avatarInitials}</div>
+            <div className="user-info">
+              <h3>{user.name}</h3>
+              <p>{user.email}</p>
+            </div>
+            <div className="arrow" onClick={toggleDropdown}>
+              <i className="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+
+          {/* Dropdown for switching accounts */}
+          {dropdownOpen && (
+            <div className="user-dropdown">
+              {accounts.map((acc, index) => (
+                <div
+                  key={index}
+                  className="dropdown-item"
+                  onClick={() => handleSwitchAccount(acc)}
+                >
+                  <div className="avatar-small">{acc.avatarInitials}</div>
+                  <div className="user-info-small">
+                    <p>{acc.name}</p>
+                    <small>{acc.email}</small>
+                  </div>
+                </div>
+              ))}
+              <div className="dropdown-item add-account">+ Add Account</div>
+            </div>
+          )}
+        </div>
+
+        {/* Buttons */}
+        <button className="btn-logout" onClick={handleSignOut}>
+          Sign Out Completely
+        </button>
+        <button className="btn-stay" onClick={handleStaySignedIn}>
+          Stay Signed In
+        </button>
+
+        <hr />
+
+        {/* Quick Actions */}
+       {/* Quick Actions */}
+<div className="quick-actions-section">
+  <p className="quick-actions-title">Quick Actions</p>
+  <div className="quick-actions">
+    <div>
+      <i className="fa-solid fa-gear qa-icon"></i>
+      <p>Settings</p>
+    </div>
+    <div>
+      <i className="fa-solid fa-circle-question qa-icon"></i>
+      <p>Help</p>
+    </div>
+    <div>
+      <i className="fa-solid fa-file-lines qa-icon"></i>
+      <p>Feedback</p>
+    </div>
+  </div>
+</div>
+
+
+        {/* Footer Security */}
+        <div className="footer-security">
+          <p>
+            <i className="fa-solid fa-circle-check"></i> Secure Connection &nbsp; • &nbsp;
+            <i className="fa-solid fa-lock"></i> Data Protected
+          </p>
+          <small>Your session will be securely terminated and all local data cleared.</small>
+        </div>
+      </div>
     </div>
   );
 }

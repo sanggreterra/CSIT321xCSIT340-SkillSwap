@@ -51,17 +51,13 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
                 <Dashboard />
-              </ProtectedRoute>
             }
           />
           <Route
             path="/settings"
             element={
-              <ProtectedRoute>
                 <Settings />
-              </ProtectedRoute>
             }
           />
           <Route path="/logout" element={<Logout />} />
