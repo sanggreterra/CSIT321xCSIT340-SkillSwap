@@ -26,11 +26,6 @@
   max-width: 448px;
 }
 
-/* When header is fixed on auth pages, push content down so it's not covered */
-body.auth-header-fixed .login-content {
-  padding-top: 88px;
-}
-
 /* Logo Section */
 .logo-section {
   display: flex;

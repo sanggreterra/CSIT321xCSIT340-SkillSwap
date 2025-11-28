@@ -27,11 +27,9 @@ function Logout() {
         setUser(null);
       })
       .finally(() => setLoading(false));
-    // Optionally load other accounts if you support account switching
   }, []);
 
   const handleSignOut = () => {
-    // Clear local session data and state
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     setUser(null);
@@ -46,7 +44,7 @@ function Logout() {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const handleSwitchAccount = (account) => {
-    console.log("Switch to account:", account); // backend handles real switch
+    console.log("Switch to account:", account);
     setDropdownOpen(false);
   };
 
@@ -54,7 +52,7 @@ function Logout() {
     <div className="logout-wrapper">
       <div className="logout-card">
 
-        {/* Header */}
+        {/* Header Section */}
         <div className="logout-header">
           <div className="logout-icon">
             <i className="fa-solid fa-arrow-right-from-bracket"></i>
@@ -63,7 +61,7 @@ function Logout() {
           <p>Choose how you'd like to proceed</p>
         </div>
 
-        {/* Dynamic User Box */}
+        {/* User Box */}
         <div className="user-box-wrapper">
           {loading ? (
             <div className="user-box loading">Loading...</div>
@@ -88,7 +86,7 @@ function Logout() {
             </div>
           )}
 
-          {/* Dropdown for switching accounts (only show if accounts exist) */}
+          {/* Dropdown */}
           {dropdownOpen && accounts.length > 0 && (
             <div className="user-dropdown">
               {accounts.map((acc, index) => (
@@ -120,25 +118,23 @@ function Logout() {
         <hr />
 
         {/* Quick Actions */}
-       {/* Quick Actions */}
-<div className="quick-actions-section">
-  <p className="quick-actions-title">Quick Actions</p>
-  <div className="quick-actions">
-    <div>
-      <i className="fa-solid fa-gear qa-icon"></i>
-      <p>Settings</p>
-    </div>
-    <div>
-      <i className="fa-solid fa-circle-question qa-icon"></i>
-      <p>Help</p>
-    </div>
-    <div>
-      <i className="fa-solid fa-file-lines qa-icon"></i>
-      <p>Feedback</p>
-    </div>
-  </div>
-</div>
-
+        <div className="quick-actions-section">
+          <p className="quick-actions-title">Quick Actions</p>
+          <div className="quick-actions">
+            <div>
+              <i className="fa-solid fa-gear qa-icon"></i>
+              <p>Settings</p>
+            </div>
+            <div>
+              <i className="fa-solid fa-circle-question qa-icon"></i>
+              <p>Help</p>
+            </div>
+            <div>
+              <i className="fa-solid fa-file-lines qa-icon"></i>
+              <p>Feedback</p>
+            </div>
+          </div>
+        </div>
 
         {/* Footer Security */}
         <div className="footer-security">

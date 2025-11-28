@@ -21,12 +21,10 @@ const Login = () => {
 
   const validatePassword = (password) => {
     if (password.length < 8) return false;
-    
     const hasLowercase = /[a-z]/.test(password);
     const hasUppercase = /[A-Z]/.test(password);
     const hasNumbers = /\d/.test(password);
     const hasSymbols = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    
     return hasLowercase && hasUppercase && hasNumbers && hasSymbols;
   };
 
@@ -36,13 +34,9 @@ const Login = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
@@ -50,23 +44,17 @@ const Login = () => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    }
+    if (!validateEmail(formData.email)) newErrors.email = 'Please enter a valid email address';
+    if (!formData.password) newErrors.password = 'Password is required';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    // Call backend login endpoint
+
     (async () => {
       try {
         const res = await authService.login({ email: formData.email.trim(), password: formData.password });
-        console.debug('Login response:', res);
         const data = res.data || res;
         if (data && data.token) {
           localStorage.setItem('token', data.token);
@@ -86,15 +74,15 @@ const Login = () => {
     <div className="login-container">
       <div className="login-background">
         <div className="login-content">
+
+          {/* Use App.jsx header logic, remove Header if user is logged in */}
           <Header />
 
-          {/* Welcome Text */}
           <div className="welcome-section">
             <h2 className="welcome-title">Welcome Back</h2>
             <p className="welcome-subtitle">Sign in to continue your learning journey</p>
           </div>
 
-          {/* Login Form */}
           <div className="login-form-container">
             <form className="login-form" onSubmit={handleSubmit}>
               <div className="form-group">
@@ -140,9 +128,7 @@ const Login = () => {
                 <a href="#" className="forgot-password">Forgot password?</a>
               </div>
 
-              <button type="submit" className="login-button">
-                Sign In
-              </button>
+              <button type="submit" className="login-button">Sign In</button>
               {errors.form && <div className="form-error">{errors.form}</div>}
             </form>
 
@@ -151,6 +137,7 @@ const Login = () => {
               <button onClick={() => navigate('/signup')} className="signup-text">Sign up</button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
